@@ -4,7 +4,7 @@ import i18n from 'i18next'; // Importar i18n para usar traducciones globales
 const isProduction = window.location.hostname !== 'localhost';
 // Actualizado para Render en lugar de Netlify
 const functionUrl = isProduction 
-  ? '/api/stories/generate'  // URL para producción en Render
+  ? 'https://backmielda.onrender.com/api/stories/generate'  // URL para producción en Render
   : 'http://localhost:5000/api/stories/generate';  // URL para desarrollo local
 
 export const generateStory = async (storyParams) => {
