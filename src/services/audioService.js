@@ -1,27 +1,26 @@
 // audioService.js
 
-
 export const generateAudio = async (options) => {
   try {
-    // Extraer propiedades del objeto de opciones
+    // Extract properties from options object
     const { text, voiceId, speechRate } = options;
     
-    // Verificar que text sea un string válido
+    // Verify that text is a valid string
     if (typeof text !== 'string') {
-      console.error('Error: el texto no es una cadena válida', text);
-      throw new Error('El texto para generar audio debe ser una cadena');
+      console.error('Error: text is not a valid string', text);
+      throw new Error('The text for audio generation must be a string');
     }
 
-    console.log('Iniciando generación de audio con texto:', text.substring(0, 50) + '...');
-    console.log('Usando voz:', voiceId);
+    console.log('Starting audio generation with text:', text.substring(0, 50) + '...');
+    console.log('Using voice:', voiceId);
     
-    // Determinar la URL correcta basada en el entorno
+    // Determine the correct URL based on environment
     const isProduction = window.location.hostname !== 'localhost';
     const audioFunctionUrl = isProduction 
-      ? 'https://backmielda.onrender.com/api/stories/generate'  // URL para producción en Netlify
-      : 'http://localhost:5000/api/audio/generate';  // URL para desarrollo local
+      ? 'https://backmielda.onrender.com/api/audio/generate'  // Corrected URL for production
+      : 'http://localhost:5000/api/audio/generate';  // URL for local development
 
-    console.log('Llamando a función en:', audioFunctionUrl);
+    console.log('Calling function at:', audioFunctionUrl);
 
     const response = await fetch(audioFunctionUrl, {
       method: 'POST',
