@@ -1,0 +1,97 @@
+.footer {
+    background-color: var(--primary-dark);
+    color: white;
+    padding: 2rem 1rem;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .footer-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+  }
+  
+  .footer-logo:hover {
+    color: var(--primary-light);
+  }
+  
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .footer-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s;
+  }
+  
+  .footer-links a:hover {
+    color: var(--primary-light);
+  }
+  
+  .footer-social {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .footer-social a {
+    color: white;
+    font-size: 1.5rem;
+    transition: color 0.3s;
+  }
+  
+  .footer-social a:hover {
+    color: var(--primary-light);
+  }
+  
+  .footer-copyright {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--text-light);
+  }
+  
+  @media (max-width: 768px) {
+    .footer-container {
+      flex-direction: column;
+      text-align: center;
+      gap: 1.5rem;
+    }
+  
+    .footer-links {
+      justify-content: center;
+    }
+  
+    .footer-social {
+      justify-content: center;
+    }
+  }
+  .footer-bottom {
+    text-align: center; /* Centra el texto horizontalmente */
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--text-light);
+  }
+  
+  .footer-bottom .made-with {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-light);
+  }
+  
+  .footer-bottom .heart {
+    color: red; /* Color del corazón */
+  }
