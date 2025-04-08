@@ -18,7 +18,7 @@ export const generateAudio = async (options) => {
     // Determinar la URL correcta basada en el entorno
     const isProduction = window.location.hostname !== 'localhost';
     const audioFunctionUrl = isProduction 
-      ? '/.netlify/functions/generate-audio'  // URL para producción en Netlify
+      ? 'https://backmielda..onrender.com/api/stories/generate'  // URL para producción en Netlify
       : 'http://localhost:5000/api/audio/generate';  // URL para desarrollo local
 
     console.log('Llamando a función en:', audioFunctionUrl);
