@@ -17,7 +17,7 @@ function Navbar() {
         <div className="nav-links">
           <Link to="/">Home</Link>
           <Link to="/about">About</Link>
-          <Link to="/services">Servicios</Link>
+          
           <Link to="/contact">Contacto</Link>
         </div>
         <div className="nav-links">
@@ -27,7 +27,7 @@ function Navbar() {
               i18n.language === 'en' ? 'active-language' : ''
             }`}
           >
-            English
+            Learn English
           </button>
           <button
             onClick={() => changeLanguage('es')}
@@ -35,7 +35,7 @@ function Navbar() {
               i18n.language === 'es' ? 'active-language' : ''
             }`}
           >
-            Español
+            Aprende Español
           </button>
         </div>
       </div>

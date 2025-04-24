@@ -1,10 +1,11 @@
 import React, { useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import '../../styles/contact.css';
+import { useTranslation } from 'react-i18next'
 
 function ContactPage() {
   const form = useRef();
-
+  const { t, i18n } = useTranslation();
   const sendEmail = (e) => {
     e.preventDefault();
 
@@ -33,7 +34,7 @@ function ContactPage() {
     <div className="contact-page">
     <div className="page-header">
         <div className="container">
-          <h1>Contacta</h1>
+          <h1>{t('services.introductiontitle')}Contacta</h1>
           <p>Esperamos saber de tí, escríbenos.Todas las ideas son bienvenidas.</p>
         </div>
       </div>

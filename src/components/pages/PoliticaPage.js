@@ -1,51 +1,63 @@
 import React from 'react';
 import '../../styles/politica.css';
+import { useTranslation } from 'react-i18next';
 
 function PoliticaPage() {
+  const { t, i18n } = useTranslation();
+
+
   return (
-    <div className="page politica-page">
-      <h1 className="page-title">Política de Privacidad</h1>
+    <div className="page terminos-page">
+      <h1 className="page-title">{t('politica.title')}</h1>
 
       <section className="section">
-        <h2 className="section-title">1. Compromiso con la Privacidad del Usuario</h2>
-        <p>
-          Este sitio web se compromete a proteger la privacidad de sus usuarios. Nuestra política se basa en el principio de no recopilación de datos personales.
-        </p>
+        <h2 className="section-title">1. {t('politica.introductiontitle')}</h2>
+        <p>{t('politica.introduction')}</p>
       </section>
 
       <section className="section">
-        <h2 className="section-title">2. No Recopilación de Datos Personales</h2>
-        <p>
-          <span className="highlight">Ausencia de Recopilación:</span> No recopilamos, almacenamos ni procesamos ningún dato personal de los usuarios.
-        </p>
-        <ul className="list">
-          <li>No se requiere registro ni creación de cuentas de usuario.</li>
-          <li>No se almacenan las historias generadas por los usuarios.</li>
-          <li>El uso de este sitio web es completamente anónimo.</li>
-        </ul>
+        <h2 className="section-title">2. {t('politica.serviceUsetitle')}</h2>
+        <p>{t('politica.serviceUse')}</p>
       </section>
 
       <section className="section">
-        <h2 className="section-title">3. Información no personal</h2>
-        <p>
-          Debido al uso de herramientas y servicios de terceros, como librerías de código, es posible que se recabe información no personal, como:
-        </p>
-        <ul className="list">
-          <li>La IP desde la que se accede a la web.</li>
-          <li>Logs de errores.</li>
-          <li>Información referente al dispositivo y navegador usado para acceder a la web.</li>
-        </ul>
-        <p>
-          Esta información es de índole técnica y en ningún momento sirve para la identificación directa de los usuarios.
-        </p>
+        <h2 className="section-title">3. {t('politica.intellectualPropertytitle')}</h2>
+        <p>{t('politica.intellectualProperty')}</p>
       </section>
 
       <section className="section">
-        <h2 className="section-title">4. Uso de Cookies</h2>
-        <p>
-          Es posible que el sitio web use cookies, pero en ningún caso estas cookies recabarán información personal ni serán utilizadas para identificar a los usuarios.
-        </p>
+        <h2 className="section-title">4. {t('politica.liabilitytitle')}</h2>
+        <p>{t('politica.liability')}</p>
       </section>
+
+      <section className="section">
+        <h2 className="section-title">5. {t('politica.privacytitle')}</h2>
+        <p>{t('politica.privacy')}</p>
+      </section>
+
+      <section className="section">
+        <h2 className="section-title">6. {t('politica.googleAdsensetitle')}</h2>
+        <p>{t('politica.googleAdsense')}</p>
+      </section>
+
+      <section className="section">
+        <h2 className="section-title">7. {t('politica.linkstitle')}</h2>
+        <p>{t('politica.links')}</p>
+      </section>
+
+      <section className="section">
+        <h2 className="section-title">8. {t('politica.changestitle')}</h2>
+        <p>{t('politica.changes')}</p>
+      </section>
+
+      <section className="section">
+        <h2 className="section-title">9. {t('politica.lawtitle')}</h2>
+        <p>{t('politica.law')}</p>
+      </section>
+
+
+
+
     </div>
   );
 }

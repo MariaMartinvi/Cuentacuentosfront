@@ -1,15 +1,19 @@
 import React from 'react';
 import '../../styles/services.css';
+import { useTranslation } from 'react-i18next'
 
 function ServicesPage() {
+  const { t, i18n } = useTranslation();
+
   return (
     <div className="page services-page">
       <div className="page-header">
         <div className="container">
-          <h1>Nuestros Servicios</h1>
-          <p>Descubre nuestras soluciones creativas impulsadas por inteligencia artificial. Personaliza, genera y disfruta de contenido único.</p>
+          <h1>1. {t('services.introductiontitle')}</h1>
+          <p>{t('services.introduction')}</p>
         </div>
       </div>
+
   
       <div className="services-grid">
         <div className="service-card">

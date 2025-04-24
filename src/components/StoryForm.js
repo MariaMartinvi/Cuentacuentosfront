@@ -9,7 +9,10 @@ function StoryForm({ onStoryGenerated }) {
   const [storyType, setStoryType] = useState('original');
   const [creativityLevel, setCreativityLevel] = useState('innovative');
   const [ageGroup, setAgeGroup] = useState('default');
+  const [childNames, setChildNames] = useState('');
+  const [englishLevel, setEnglishLevel] = useState('intermediate');
   const [isLoading, setIsLoading] = useState(false);
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,7 +31,9 @@ function StoryForm({ onStoryGenerated }) {
         storyType,
         creativityLevel,
         ageGroup,
-        language: i18n.language // Añadir el idioma actual
+        childNames,
+        englishLevel,
+        language: i18n.language
       });
 
       onStoryGenerated(generatedStory);
@@ -46,6 +51,8 @@ function StoryForm({ onStoryGenerated }) {
     setStoryType('original');
     setCreativityLevel('innovative');
     setAgeGroup('default');
+    setChildNames('');
+    setEnglishLevel('intermediate');
     onStoryGenerated(null);
   };
 
@@ -69,7 +76,35 @@ function StoryForm({ onStoryGenerated }) {
             required
           />
         </div>
+        <div className="form-row">
+          <div className="form-group">
+            <label htmlFor="childNames">
+              <span className="form-icon">👶</span> {t('storyForm.childNamesLabel')}
+            </label>
+            <input
+              type="text"
+              id="childNames"
+              value={childNames}
+              onChange={(e) => setChildNames(e.target.value)}
+              placeholder={t('storyForm.childNamesPlaceholder')}
+            />
+          </div>
 
+          <div className="form-group">
+            <label htmlFor="englishLevel">
+              <span className="form-icon">🌍</span> {t('storyForm.englishLevelLabel')}
+            </label>
+            <select
+              id="englishLevel"
+              value={englishLevel}
+              onChange={(e) => setEnglishLevel(e.target.value)}
+            >
+              <option value="basic">{t('storyForm.englishLevelBeginner')}</option>
+              <option value="intermediate">{t('storyForm.englishLevelIntermediate')}</option>
+              <option value="advanced">{t('storyForm.englishLevelAdvanced')}</option>
+            </select>
+          </div>
+        </div>
         <div className="form-row">
           <div className="form-group">
             <label htmlFor="storyLength">
@@ -106,6 +141,9 @@ function StoryForm({ onStoryGenerated }) {
           </div>
         </div>
 
+        
+
+        
         <div className="form-row">
           <div className="form-group">
             <label htmlFor="creativityLevel">

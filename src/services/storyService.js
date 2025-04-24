@@ -7,23 +7,74 @@ const functionUrl = isProduction
   ? 'https://backmielda.onrender.com/api/stories/generate'  // URL para producción en Render
   : 'http://localhost:5000/api/stories/generate';  // URL para desarrollo local
 
+// URL base para el backend
+const backendBaseUrl = isProduction
+  ? 'https://backmielda.onrender.com'
+  : 'http://localhost:5000';
+
+// Configuración común para fetch
+const fetchConfig = {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+  },
+  mode: 'cors',
+  credentials: 'include'
+};
+
 export const generateStory = async (storyParams) => {
   try {
     console.log('Iniciando generación de historia con params:', storyParams);
     console.log('Llamando a función en:', functionUrl);
+    console.log('Entorno:', isProduction ? 'Producción' : 'Desarrollo');
+    console.log('Backend base URL:', backendBaseUrl);
+    console.log('Fetch config:', fetchConfig);
+
+    // Verificar si el backend está disponible
+    try {
+      console.log('Attempting health check to:', `${backendBaseUrl}/api/health`);
+      
+      // Simple GET request without any special headers
+      const healthCheckResponse = await fetch(`${backendBaseUrl}/api/health`)
+        .catch(error => {
+          console.error('Network error details:', {
+            name: error.name,
+            message: error.message,
+            stack: error.stack,
+            type: error.type,
+            cause: error.cause
+          });
+          throw new Error(`No se pudo conectar al servidor. Verifica que esté ejecutándose en ${backendBaseUrl}`);
+        });
+      
+      if (!healthCheckResponse.ok) {
+        throw new Error(`El servidor respondió con error: ${healthCheckResponse.status}`);
+      }
+
+      const healthData = await healthCheckResponse.json();
+      console.log('Health check successful:', healthData);
+    } catch (healthError) {
+      console.error('Error en health check:', healthError);
+      throw healthError;
+    }
 
     // Intentar la llamada a la función
     const response = await fetch(functionUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      ...fetchConfig,
       body: JSON.stringify(storyParams),
+      headers: {
+        ...fetchConfig.headers,
+        'Access-Control-Request-Method': 'POST'
+      }
     });
 
     // Mostrar información sobre la respuesta
-    console.log('Respuesta recibida, status:', response.status);
-    console.log('Headers:', [...response.headers.entries()]);
+    console.log('Respuesta recibida:', {
+      status: response.status,
+      statusText: response.statusText,
+      headers: [...response.headers.entries()]
+    });
 
     // Si la respuesta no es exitosa, manejar el error antes de leer el cuerpo
     if (!response.ok) {
