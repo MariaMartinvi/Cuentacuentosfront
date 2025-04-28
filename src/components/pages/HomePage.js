@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import StoryForm from '../StoryForm.js';
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next';
 import StoryDisplay from '../StoryDisplay.js';
 import '../../styles/global.css';
 
-
-function App() {
+function HomePage() {
   const [generatedStory, setGeneratedStory] = useState(null);
   const { t } = useTranslation();
+
   const handleStoryGenerated = (story) => {
     setGeneratedStory(story);
 
@@ -24,12 +24,10 @@ function App() {
 
   return (
     <div className="app">
-      
-
       <div className="hero-section">
         <div className="hero-container">
-        <h1>{t('homepage.heroTitle')}</h1>
-        <p>{t('homepage.heroDescription')}</p>
+          <h1>{t('homepage.heroTitle')}</h1>
+          <p>{t('homepage.heroDescription')}</p>
         </div>
       </div>
 
@@ -42,7 +40,7 @@ function App() {
 
         {!generatedStory && (
           <div className="features-preview">
-            <h2>Características destacadas</h2>
+            <h2>{t('homepage.featuresTitle')}</h2>
             <div className="features-grid">
               <div className="feature-card">
                 <div className="feature-icon">✨</div>
@@ -65,10 +63,8 @@ function App() {
           </div>
         )}
       </main>
-
-      
     </div>
   );
 }
 
-export default App;
+export default HomePage;

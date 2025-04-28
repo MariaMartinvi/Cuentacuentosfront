@@ -1,0 +1,127 @@
+.subscribe-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.subscribe-container h1 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.subscription-features {
+  margin-bottom: 2rem;
+}
+
+.subscription-features h2 {
+  color: #444;
+  margin-bottom: 1rem;
+}
+
+.subscription-features ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.subscription-features li {
+  padding: 0.5rem 0;
+  color: #666;
+  display: flex;
+  align-items: center;
+}
+
+.subscription-features li:before {
+  content: "✓";
+  color: #4CAF50;
+  margin-right: 0.5rem;
+}
+
+.subscription-price {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.subscription-price h2 {
+  color: #444;
+  margin-bottom: 0.5rem;
+}
+
+.subscription-price p {
+  color: #666;
+  font-size: 1.2rem;
+}
+
+.subscribe-button {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.subscribe-button:hover {
+  background-color: #45a049;
+}
+
+.subscribe-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.subscribe-button.loading {
+  position: relative;
+  color: transparent;
+}
+
+.subscribe-button.loading:after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 50%;
+  left: 50%;
+  margin: -10px -10px;
+  border: 2px solid #ffffff;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.error-message {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close-error {
+  background: none;
+  border: none;
+  color: #c62828;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0 0.5rem;
+}
+
+.close-error:hover {
+  color: #b71c1c;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+} 

@@ -1,4 +1,5 @@
 // audioService.js
+import { getAuthHeader } from './authService';
 
 export const generateAudio = async (options) => {
   try {
@@ -17,8 +18,8 @@ export const generateAudio = async (options) => {
     // Determine the correct URL based on environment
     const isProduction = window.location.hostname !== 'localhost';
     const audioFunctionUrl = isProduction 
-      ? 'https://backmielda.onrender.com/api/audio/generate'  // Corrected URL for production
-      : 'http://localhost:5000/api/audio/generate';  // URL for local development
+      ? 'https://backmielda.onrender.com/api/audio/generate'
+      : 'http://localhost:5001/api/audio/generate';
 
     console.log('Calling function at:', audioFunctionUrl);
 
@@ -26,14 +27,17 @@ export const generateAudio = async (options) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        ...getAuthHeader()
       },
       body: JSON.stringify({ text, voiceId, speechRate }),
+      credentials: 'include' // Include cookies in the request
     });
 
     if (!response.ok) {
       const errorText = await response.text();
       console.error('Error response:', errorText);
-      throw new Error('Error al generar el audio: ' + errorText);
+      throw new Error(`Error al generar el audio (${response.status}): ${errorText}`);
     }
 
     const data = await response.json();

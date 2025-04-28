@@ -25,8 +25,9 @@ function Footer() {
             <h3>Enlaces Rápidos</h3>
             <ul className="footer-links">
               <li><Link to="/como-funciona">Cómo Funciona</Link></li>
-              <li><Link to="/terminos-y-condiciones">Términos y Condiciones</Link></li>
-              <li><Link to="/politica-de-privacidad">Política de Privacidad</Link></li>
+              <li><Link to="/about">Sobre Nosotros</Link></li>
+              <li><Link to="/terminos">Términos y Condiciones</Link></li>
+              <li><Link to="/politica">Política de Privacidad</Link></li>
             </ul>
           </div>
         </div>

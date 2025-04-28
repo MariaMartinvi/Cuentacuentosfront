@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { generateStory } from '../services/storyService.js';
+import { getCurrentUser } from '../services/authService';
+import { useNavigate } from 'react-router-dom';
 
 function StoryForm({ onStoryGenerated }) {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
+  const user = getCurrentUser();
+  
   const [topic, setTopic] = useState('');
   const [storyLength, setStoryLength] = useState('medium');
   const [storyType, setStoryType] = useState('original');
@@ -12,22 +17,23 @@ function StoryForm({ onStoryGenerated }) {
   const [childNames, setChildNames] = useState('');
   const [englishLevel, setEnglishLevel] = useState('intermediate');
   const [isLoading, setIsLoading] = useState(false);
-  
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!topic.trim()) {
-      alert(t('storyForm.alertTopicRequired'));
+    
+    if (!user) {
+      setError(t('storyForm.loginRequired'));
       return;
     }
 
     setIsLoading(true);
+    setError(null);
 
     try {
-      const generatedStory = await generateStory({
+      const story = await generateStory({
         topic,
-        length: storyLength,
+        storyLength,
         storyType,
         creativityLevel,
         ageGroup,
@@ -35,25 +41,12 @@ function StoryForm({ onStoryGenerated }) {
         englishLevel,
         language: i18n.language
       });
-
-      onStoryGenerated(generatedStory);
-    } catch (error) {
-      console.error('Error generating story:', error);
-      alert(t('storyForm.alertError'));
+      onStoryGenerated(story);
+    } catch (err) {
+      setError(err.message);
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const handleReset = () => {
-    setTopic('');
-    setStoryLength('medium');
-    setStoryType('original');
-    setCreativityLevel('innovative');
-    setAgeGroup('default');
-    setChildNames('');
-    setEnglishLevel('intermediate');
-    onStoryGenerated(null);
   };
 
   return (
@@ -62,6 +55,7 @@ function StoryForm({ onStoryGenerated }) {
         <span className="icon-title">🦉</span>
         {t('storyForm.title')}
       </h2>
+
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="topic">
@@ -76,6 +70,7 @@ function StoryForm({ onStoryGenerated }) {
             required
           />
         </div>
+
         <div className="form-row">
           <div className="form-group">
             <label htmlFor="childNames">
@@ -105,6 +100,7 @@ function StoryForm({ onStoryGenerated }) {
             </select>
           </div>
         </div>
+
         <div className="form-row">
           <div className="form-group">
             <label htmlFor="storyLength">
@@ -141,59 +137,77 @@ function StoryForm({ onStoryGenerated }) {
           </div>
         </div>
 
-        
-
-        
         <div className="form-row">
           <div className="form-group">
-            <label htmlFor="creativityLevel">
-              <span className="form-icon">💡</span> {t('storyForm.creativityLabel')}
-            </label>
-            <select
-              id="creativityLevel"
-              value={creativityLevel}
-              onChange={(e) => setCreativityLevel(e.target.value)}
-            >
-              <option value="innovative">{t('storyForm.creativityInnovative')}</option>
-              <option value="imaginative">{t('storyForm.creativityImaginative')}</option>
-              <option value="visionary">{t('storyForm.creativityVisionary')}</option>
-              <option value="conservative">{t('storyForm.creativityConservative')}</option>
-              <option value="inspired">{t('storyForm.creativityInspired')}</option>
-            </select>
-          </div>
-
-          <div className="form-group">
             <label htmlFor="ageGroup">
-              <span className="form-icon">👥</span> {t('storyForm.ageLabel')}
+              <span className="form-icon">🎯</span> {t('storyForm.ageGroupLabel')}
             </label>
             <select
               id="ageGroup"
               value={ageGroup}
               onChange={(e) => setAgeGroup(e.target.value)}
             >
-              <option value="default">{t('storyForm.ageDefault')}</option>
-              <option value="3-6">{t('storyForm.age3to6')}</option>
-              <option value="7-13">{t('storyForm.age7to13')}</option>
-              <option value="13-20">{t('storyForm.age13to20')}</option>
-              <option value="21-35">{t('storyForm.age21to35')}</option>
-              <option value="35+">{t('storyForm.age35plus')}</option>
+              <option value="default">{t('storyForm.ageGroupDefault')}</option>
+              <option value="3-5">{t('storyForm.ageGroup3to5')}</option>
+              <option value="6-8">{t('storyForm.ageGroup6to8')}</option>
+              <option value="9-12">{t('storyForm.ageGroup9to12')}</option>
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="creativityLevel">
+              <span className="form-icon">🎨</span> {t('storyForm.creativityLevelLabel')}
+            </label>
+            <select
+              id="creativityLevel"
+              value={creativityLevel}
+              onChange={(e) => setCreativityLevel(e.target.value)}
+            >
+              <option value="standard">{t('storyForm.creativityStandard')}</option>
+              <option value="innovative">{t('storyForm.creativityInnovative')}</option>
+              <option value="creative">{t('storyForm.creativityCreative')}</option>
             </select>
           </div>
         </div>
 
+        {error && (
+          <div className="error-message">
+            <p>{error}</p>
+          </div>
+        )}
+
         <div className="button-group">
-          <button type="submit" className="generate-btn" disabled={isLoading}>
+          <button
+            type="submit"
+            className="generate-btn"
+            disabled={isLoading}
+          >
             {isLoading ? (
               <>
-                <span className="spinner"></span> {t('storyForm.generating')}
+                <span className="spinner"></span>
+                {t('storyForm.generating')}
               </>
             ) : (
               <>
-                <span className="btn-icon">✨</span> {t('storyForm.generateButton')}
+                <span className="btn-icon">✨</span>
+                {t('storyForm.generateButton')}
               </>
             )}
           </button>
-          <button type="button" className="reset-btn" onClick={handleReset}>
+          <button
+            type="button"
+            className="reset-btn"
+            onClick={() => {
+              setTopic('');
+              setStoryLength('medium');
+              setStoryType('original');
+              setCreativityLevel('innovative');
+              setAgeGroup('default');
+              setChildNames('');
+              setEnglishLevel('intermediate');
+              setError(null);
+            }}
+          >
             {t('storyForm.resetButton')}
           </button>
         </div>

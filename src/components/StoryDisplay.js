@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import AudioPlayer from './AudioPlayer.js';
 import { generateAudio } from '../services/audioService.js';
 
 function StoryDisplay({ story }) {
+  const { t } = useTranslation();
   const [audioUrl, setAudioUrl] = useState(null);
   const [voiceType, setVoiceType] = useState('female');
   const [isGeneratingAudio, setIsGeneratingAudio] = useState(false);
@@ -11,7 +13,7 @@ function StoryDisplay({ story }) {
 
   const handleCopyToClipboard = () => {
     navigator.clipboard.writeText(story.content);
-    alert('Historia copiada al portapapeles');
+    alert(t('storyDisplay.copySuccess'));
   };
 
   const handleDownloadText = () => {
@@ -36,27 +38,25 @@ function StoryDisplay({ story }) {
         speechRate: 1.0
       });
 
-      console.log("Respuesta completa del servidor:", audioData);
-    console.log("Tipo de respuesta:", typeof audioData);
-    console.log("Propiedades disponibles:", Object.keys(audioData));
-    
-    if (audioData.audioUrl) {
-      console.log("audioUrl encontrado:", audioData.audioUrl.substring(0, 50) + "...");
-      setAudioUrl(audioData.audioUrl);
-    } else if (audioData.audioData) {
-      console.log("audioData encontrado, convirtiendo a URL...");
-      setAudioUrl(`data:audio/mp3;base64,${audioData.audioData}`);
-    } else {
-      console.error("No se encontró audioUrl ni audioData en la respuesta");
-      throw new Error("La respuesta del servidor no contiene datos de audio");
-    }
+      if (!audioData) {
+        throw new Error('No se recibieron datos de audio del servidor');
+      }
 
-      setAudioUrl(audioData.audioUrl);
-      console.log("audioUrl establecido en estado:", audioUrl ? "Sí" : "No");
+      console.log("Respuesta del servidor:", audioData);
+      
+      if (audioData.audioUrl) {
+        console.log("URL de audio recibida:", audioData.audioUrl.substring(0, 50) + "...");
+        setAudioUrl(audioData.audioUrl);
+      } else if (audioData.audioData) {
+        console.log("Datos de audio recibidos, convirtiendo a URL...");
+        setAudioUrl(`data:audio/mp3;base64,${audioData.audioData}`);
+      } else {
+        throw new Error("La respuesta del servidor no contiene datos de audio válidos");
+      }
 
     } catch (error) {
       console.error('Error generating audio:', error);
-      alert('Hubo un error al generar el audio. Por favor, inténtalo de nuevo.');
+      alert(t('storyDisplay.audioError') + ': ' + error.message);
     } finally {
       setIsGeneratingAudio(false);
     }
@@ -66,7 +66,7 @@ function StoryDisplay({ story }) {
     <div className="story-display">
       <h3>
         <span className="title-icon">📖</span>
-        {story.title || 'Tu Historia'}
+        {story.title || t('storyDisplay.title')}
       </h3>
 
       <div className="story-content">
@@ -77,34 +77,34 @@ function StoryDisplay({ story }) {
 
       <div className="story-actions">
         <div className="action-section">
-          <div className="action-title">Opciones de texto:</div>
+          <div className="action-title">{t('storyDisplay.textOptions')}</div>
           <div className="text-actions">
             <button onClick={handleCopyToClipboard}>
-              <span className="btn-icon">📋</span> Copiar texto
+              <span className="btn-icon">📋</span> {t('storyDisplay.copyText')}
             </button>
             <button onClick={handleDownloadText}>
-              <span className="btn-icon">💾</span> Descargar texto
+              <span className="btn-icon">💾</span> {t('storyDisplay.downloadText')}
             </button>
           </div>
         </div>
 
         <div className="action-section">
-          <div className="action-title">Convertir a audio:</div>
+          <div className="action-title">{t('storyDisplay.audioOptions')}</div>
           <div className="audio-actions">
             <div className="voice-selector">
-              <label htmlFor="voiceType">Tipo de voz:</label>
+              <label htmlFor="voiceType">{t('storyDisplay.voiceType')}</label>
               <select
                 id="voiceType"
                 value={voiceType}
                 onChange={(e) => setVoiceType(e.target.value)}
                 disabled={isGeneratingAudio}
               >
-                <option value="female">Mujer (España)</option>
-                <option value="male">Hombre (España)</option>
-                <option value="female-latam">Mujer (Latinoamérica)</option>
-                <option value="male-latam">Hombre (Latinoamérica)</option>
-                <option value="female-english">Mujer Inglés (USA)</option>
-                <option value="male-english">Hombre Inglés (USA)</option>
+                <option value="female">{t('storyDisplay.voiceFemale')}</option>
+                <option value="male">{t('storyDisplay.voiceMale')}</option>
+                <option value="female-latam">{t('storyDisplay.voiceFemaleLatam')}</option>
+                <option value="male-latam">{t('storyDisplay.voiceMaleLatam')}</option>
+                <option value="female-english">{t('storyDisplay.voiceFemaleEnglish')}</option>
+                <option value="male-english">{t('storyDisplay.voiceMaleEnglish')}</option>
               </select>
             </div>
 
@@ -115,11 +115,11 @@ function StoryDisplay({ story }) {
             >
               {isGeneratingAudio ? (
                 <>
-                  <span className="spinner"></span> Generando audio...
+                  <span className="spinner"></span> {t('storyDisplay.generatingAudio')}
                 </>
               ) : (
                 <>
-                  <span className="btn-icon">🔊</span> Generar Audio
+                  <span className="btn-icon">🔊</span> {t('storyDisplay.generateAudio')}
                 </>
               )}
             </button>
