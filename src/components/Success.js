@@ -13,20 +13,28 @@ const Success = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Determine API URL the same way as in your other services
+  const isProduction = window.location.hostname !== 'localhost';
+  const API_URL = isProduction 
+    ? 'https://backmielda.onrender.com'
+    : 'http://localhost:5001';
+
   useEffect(() => {
     const verifySubscription = async () => {
       const sessionId = new URLSearchParams(location.search).get('session_id');
       
       if (!sessionId) {
-        setError(t('subscription.noSessionId'));
+        console.error("No session ID found in URL params");
+        setError(t('subscription.noSessionId') || "Missing session ID");
         setLoading(false);
         return;
       }
 
       try {
         console.log('Verifying subscription with session ID:', sessionId);
-        const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5001';
-        const response = await axios.get(`${apiUrl}/api/stripe/success`, {
+        console.log('Using API URL:', API_URL);
+        
+        const response = await axios.get(`${API_URL}/api/stripe/success`, {
           params: { session_id: sessionId },
           headers: {
             'Content-Type': 'application/json',
@@ -59,16 +67,23 @@ const Success = () => {
         }
       } catch (err) {
         console.error('Error verifying subscription:', err);
+        console.error('Error details:', err.response?.data || err.message);
         setError(t('subscription.verificationError') || 'Error verifying subscription');
         setLoading(false);
       }
     };
 
     verifySubscription();
-  }, [location, navigate, t, refreshUser]);
+  }, [location, navigate, t, refreshUser, API_URL]);
 
+  // If user data is still loading, show a loading indicator
   if (!user) {
-    return null;
+    return (
+      <div className="success-container">
+        <h1>{t('subscription.paymentSuccess')}</h1>
+        <p>{t('subscription.loading')}</p>
+      </div>
+    );
   }
 
   return (

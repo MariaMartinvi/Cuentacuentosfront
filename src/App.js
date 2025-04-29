@@ -19,7 +19,6 @@ import Subscribe from './components/Subscribe';
 import { I18nextProvider } from 'react-i18next';
 import i18n from './i18n';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
-import SubscriptionSuccess from './components/SubscriptionSuccess';
 import Success from './components/Success';
 import { useTranslation } from 'react-i18next';
 
@@ -71,7 +70,11 @@ function App() {
                   <Subscribe />
                 </PrivateRoute>
               } />
+              
+              {/* Important: Success route that handles query parameters */}
               <Route path="/success" element={<Success />} />
+              
+              {/* Catch-all route */}
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
             <Footer />
