@@ -1,9 +1,13 @@
 import axios from 'axios';
-import { getAuthHeader } from './authService';
+import { loadStripe as loadStripeJs } from '@stripe/stripe-js';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
+// Determine the correct API URL based on environment
+const isProduction = window.location.hostname !== 'localhost';
+const API_URL = isProduction 
+  ? 'https://backmielda.onrender.com'
+  : 'http://localhost:5001';
 
-// Configure axios instance
+// Configure axios defaults
 const axiosInstance = axios.create({
   baseURL: API_URL,
   withCredentials: true,
@@ -13,42 +17,28 @@ const axiosInstance = axios.create({
   }
 });
 
+// Add auth token to requests
+axiosInstance.interceptors.request.use(config => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+// Create a checkout session
 export const createCheckoutSession = async (email) => {
   try {
-    console.log('Creating checkout session for email:', email);
+    console.log('Creating checkout session for:', email);
     console.log('Using API URL:', API_URL);
-    
-    if (!email) {
-      throw new Error('Email is required');
-    }
 
-    // Get auth header
-    const authHeader = getAuthHeader();
-    console.log('Auth header:', authHeader);
-
+    // IMPORTANT: Fix the endpoint path here - use /api/stripe/ instead of /api/subscription/
     const response = await axiosInstance.post('/api/stripe/create-checkout-session', {
       email
-    }, {
-      headers: {
-        ...authHeader
-      }
     });
 
-    console.log('Server response:', response.data);
-
-    if (!response.data) {
-      throw new Error('Empty response from server');
-    }
-
-    // Check for both sessionId and id in the response
-    const sessionId = response.data.sessionId || response.data.id;
-    if (!sessionId) {
-      console.error('Invalid response format:', response.data);
-      throw new Error('Invalid response format: missing sessionId or id');
-    }
-
-    console.log('Checkout session created successfully:', sessionId);
-    return { id: sessionId };
+    console.log('Checkout session created:', response.data);
+    return response.data;
   } catch (error) {
     console.error('Error creating checkout session:', {
       message: error.message,
@@ -58,57 +48,56 @@ export const createCheckoutSession = async (email) => {
       email: email,
       error: error
     });
-    
-    if (error.response?.data?.error) {
-      throw new Error(error.response.data.error);
-    } else if (error.response?.data?.details) {
-      throw new Error(`${error.response.data.error}: ${error.response.data.details}`);
-    } else if (!error.response) {
-      throw new Error('Network error - Unable to connect to the server. Please check if the backend server is running.');
-    } else {
-      throw new Error(error.message || 'Error creating checkout session');
-    }
-  }
-};
-
-export const loadStripe = async () => {
-  try {
-    const stripe = await import('@stripe/stripe-js');
-    const stripePublicKey = process.env.REACT_APP_STRIPE_PUBLIC_KEY;
-    
-    if (!stripePublicKey) {
-      throw new Error('Stripe public key is not configured');
-    }
-
-    console.log('Loading Stripe with public key:', stripePublicKey);
-    const stripeInstance = await stripe.loadStripe(stripePublicKey);
-    
-    if (!stripeInstance) {
-      throw new Error('Failed to initialize Stripe');
-    }
-    
-    return stripeInstance;
-  } catch (error) {
-    console.error('Error loading Stripe:', error);
-    throw new Error('Error loading Stripe: ' + error.message);
-  }
-};
-
-export const redirectToCheckout = async (sessionId) => {
-  try {
-    console.log('Redirecting to checkout with session ID:', sessionId);
-    const stripe = await loadStripe();
-    
-    const { error } = await stripe.redirectToCheckout({
-      sessionId: sessionId
-    });
-    
-    if (error) {
-      console.error('Stripe redirect error:', error);
-      throw error;
-    }
-  } catch (error) {
-    console.error('Error in redirectToCheckout:', error);
     throw error;
   }
-}; 
+};
+
+// Load Stripe
+let stripePromise;
+export const loadStripe = async () => {
+  if (!stripePromise) {
+    const publishableKey = isProduction
+      ? 'pk_live_51Plm0fBiI8gG3OUx65fNZC8DwIGRCDPSMVbYJEFrK1MzqHiRUcAA79YQhLvgwm1KoL5e3HRomTaqFD0jKVDnj0Yl00OJW7NGcJ'
+      : 'pk_test_51Plm0fBiI8gG3OUxnzpg4BQF2Hcp9nVLGexD9wfDsXNzIUZTCvbVWD2cQwL6G1d0x27f29zYjmIz9WYDTHIzlPOQ00vUbsODXJ';
+    
+    stripePromise = loadStripeJs(publishableKey);
+  }
+  return stripePromise;
+};
+
+// Verify subscription after successful payment
+export const verifySubscription = async (sessionId) => {
+  try {
+    console.log('Verifying subscription with session ID:', sessionId);
+    // Also update this endpoint if needed
+    const response = await axiosInstance.get('/api/stripe/success', {
+      params: { session_id: sessionId }
+    });
+    console.log('Subscription verification response:', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Subscription verification error:', error);
+    throw error;
+  }
+};
+
+// Other subscription-related functions
+export const getSubscriptionStatus = async () => {
+  try {
+    const response = await axiosInstance.get('/api/stripe/subscription-status');
+    return response.data;
+  } catch (error) {
+    console.error('Error getting subscription status:', error);
+    throw error;
+  }
+};
+
+export const cancelSubscription = async () => {
+  try {
+    const response = await axiosInstance.post('/api/stripe/cancel-subscription');
+    return response.data;
+  } catch (error) {
+    console.error('Error canceling subscription:', error);
+    throw error;
+  }
+};
