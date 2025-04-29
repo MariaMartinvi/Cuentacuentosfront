@@ -1,19 +1,19 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { getCurrentUser, logout } from '../services/authService';
 
 function Navbar() {
   const { i18n, t } = useTranslation();
   const navigate = useNavigate();
-  const user = getCurrentUser();
+  const user = JSON.parse(localStorage.getItem('user'));
 
   const changeLanguage = (language) => {
     i18n.changeLanguage(language);
   };
 
   const handleLogout = () => {
-    logout();
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
     navigate('/login');
   };
 
