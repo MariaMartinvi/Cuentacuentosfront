@@ -1,0 +1,37 @@
+{
+  "subscription": {
+    "title": "Subscribe to Mi Cuenta Cuentos",
+    "subtitle": "Unlock unlimited audio stories for your children",
+    "planTitle": "Monthly Subscription",
+    "planDescription": "Generate up to 30 audio stories per month",
+    "price": "5€/month",
+    "features": [
+      "Generate up to 30 audio stories per month",
+      "High-quality AI narration",
+      "Access to all story categories",
+      "Cancel anytime from your user page",
+      "New stories added regularly"
+    ],
+    "subscribeButton": "Subscribe Now",
+    "cancelInfo": "You can cancel your subscription at any time from your user page",
+    "paymentInfo": "Secure payment processed by Stripe",
+    "success": "Subscription successful!",
+    "error": "There was an error processing your subscription. Please try again."
+  },
+  "profile": {
+    "title": "My Profile",
+    "name": "Name",
+    "email": "Email",
+    "subscriptionStatus": "Subscription Status",
+    "status": {
+      "active": "Active",
+      "free": "Free",
+      "cancelled": "Cancelled"
+    },
+    "cancelSubscription": "Cancel Subscription",
+    "cancelInfo": "Your subscription will be cancelled at the end of the current billing period",
+    "subscriptionCancelled": "Your subscription has been cancelled successfully",
+    "loading": "Processing...",
+    "error": "An error occurred. Please try again."
+  }
+} 

@@ -1,106 +1,85 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useAuth } from '../contexts/AuthContext';
-import { createCheckoutSession, loadStripe } from '../services/subscriptionService';
+import axios from 'axios';
 import './Subscribe.css';
 
 const Subscribe = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
-  const { user } = useAuth();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    if (!user) {
-      navigate('/login');
-    }
-  }, [user, navigate]);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
 
   const handleSubscribe = async () => {
+    setLoading(true);
+    setError('');
     try {
-      setLoading(true);
-      setError(null);
+      const token = localStorage.getItem('token');
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/api/subscription/create-checkout-session`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
 
-      if (!user?.email) {
-        throw new Error(t('subscribe.error.noEmail'));
-      }
-
-      console.log('Creating checkout session for user:', user.email);
-      const session = await createCheckoutSession(user.email);
-      
-      if (!session?.id) {
-        console.error('Invalid session response:', session);
-        throw new Error(t('subscribe.error.noSession'));
-      }
-
-      console.log('Loading Stripe with session:', session.id);
-      const stripe = await loadStripe();
-      
-      if (!stripe) {
-        throw new Error(t('subscribe.error.stripeLoad'));
-      }
-
-      console.log('Redirecting to Stripe checkout with session ID:', session.id);
-      const { error: stripeError } = await stripe.redirectToCheckout({
-        sessionId: session.id
-      });
-
-      if (stripeError) {
-        console.error('Stripe redirect error:', stripeError);
-        throw new Error(stripeError.message);
+      if (response.data.url) {
+        window.location.href = response.data.url;
+      } else {
+        setError(t('subscription.error'));
       }
     } catch (err) {
-      console.error('Subscription error:', err);
-      setError(err.message || t('subscribe.error.general'));
+      setError(err.response?.data?.message || t('subscription.error'));
     } finally {
       setLoading(false);
     }
   };
 
-  if (!user) {
-    return null;
-  }
-
   return (
     <div className="subscribe-container">
-      <h1>{t('subscribe.title')}</h1>
-      
-      <div className="subscription-features">
-        <h2>{t('subscribe.features.title')}</h2>
-        <ul>
-          <li>{t('subscribe.features.unlimited')}</li>
-          <li>{t('subscribe.features.priority')}</li>
-          <li>{t('subscribe.features.support')}</li>
-        </ul>
-      </div>
+      <div className="subscribe-card">
+        <h1 className="subscribe-title">{t('subscription.title')}</h1>
+        <p className="subscribe-subtitle">{t('subscription.subtitle')}</p>
 
-      <div className="subscription-price">
-        <h2>{t('subscribe.price.title')}</h2>
-        <p>{t('subscribe.price.amount')}</p>
-      </div>
+        <div className="subscription-plan">
+          <h2 className="plan-title">{t('subscription.planTitle')}</h2>
+          <p className="plan-price">{t('subscription.price')}</p>
+          <p className="plan-description">{t('subscription.planDescription')}</p>
+          
+          <ul className="features-list">
+            {t('subscription.features', { returnObjects: true }).map((feature, index) => (
+              <li key={index} className="feature-item">
+                <span className="check-icon">✓</span>
+                {feature}
+              </li>
+            ))}
+          </ul>
 
-      {error && (
-        <div className="error-message">
-          <span>{error}</span>
-          <button 
-            className="close-error" 
-            onClick={() => setError(null)}
-            aria-label={t('subscribe.closeError')}
+          <button
+            className="subscribe-button"
+            onClick={handleSubscribe}
+            disabled={loading}
           >
-            ×
+            {loading ? t('subscription.loading') : t('subscription.subscribeButton')}
           </button>
-        </div>
-      )}
 
-      <button
-        className={`subscribe-button ${loading ? 'loading' : ''}`}
-        onClick={handleSubscribe}
-        disabled={loading}
-      >
-        {loading ? '' : t('subscribe.button')}
-      </button>
+          <p className="cancel-info">{t('subscription.cancelInfo')}</p>
+          <p className="payment-info">{t('subscription.paymentInfo')}</p>
+        </div>
+
+        {error && (
+          <div className="error-message">
+            {error}
+          </div>
+        )}
+
+        {success && (
+          <div className="success-message">
+            {t('subscription.success')}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

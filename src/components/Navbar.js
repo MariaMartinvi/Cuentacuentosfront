@@ -30,7 +30,9 @@ function Navbar() {
         <div className="nav-links">
           {user ? (
             <>
-              <span className="user-email">{user.email}</span>
+              <Link to="/profile" className="user-name">
+                {user.name || user.email}
+              </Link>
               {user.subscriptionStatus === 'free' && (
                 <Link to="/subscribe" className="subscribe-link">
                   {t('subscription.subscribeButton')}

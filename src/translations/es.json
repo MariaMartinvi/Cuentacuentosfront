@@ -1,0 +1,37 @@
+{
+  "subscription": {
+    "title": "Suscríbete a Mi Cuenta Cuentos",
+    "subtitle": "Desbloquea cuentos de audio ilimitados para tus hijos",
+    "planTitle": "Suscripción Mensual",
+    "planDescription": "Genera hasta 30 cuentos de audio al mes",
+    "price": "5€/mes",
+    "features": [
+      "Genera hasta 30 cuentos de audio al mes",
+      "Narración de IA de alta calidad",
+      "Acceso a todas las categorías de cuentos",
+      "Cancela en cualquier momento desde tu página de usuario",
+      "Nuevos cuentos añadidos regularmente"
+    ],
+    "subscribeButton": "Suscribirse Ahora",
+    "cancelInfo": "Puedes cancelar tu suscripción en cualquier momento desde tu página de usuario",
+    "paymentInfo": "Pago seguro procesado por Stripe",
+    "success": "¡Suscripción exitosa!",
+    "error": "Hubo un error al procesar tu suscripción. Por favor, inténtalo de nuevo."
+  },
+  "profile": {
+    "title": "Mi Perfil",
+    "name": "Nombre",
+    "email": "Correo electrónico",
+    "subscriptionStatus": "Estado de la Suscripción",
+    "status": {
+      "active": "Activa",
+      "free": "Gratuita",
+      "cancelled": "Cancelada"
+    },
+    "cancelSubscription": "Cancelar Suscripción",
+    "cancelInfo": "Tu suscripción se cancelará al final del período de facturación actual",
+    "subscriptionCancelled": "Tu suscripción ha sido cancelada exitosamente",
+    "loading": "Procesando...",
+    "error": "Ha ocurrido un error. Por favor, inténtalo de nuevo."
+  }
+} 

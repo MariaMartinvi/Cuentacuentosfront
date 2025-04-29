@@ -8,6 +8,7 @@ const Register = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
+    name: '',
     email: '',
     password: '',
     confirmPassword: ''
@@ -36,6 +37,7 @@ const Register = () => {
 
     try {
       const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/register`, {
+        name: formData.name,
         email: formData.email,
         password: formData.password
       });
@@ -75,6 +77,19 @@ const Register = () => {
         )}
 
         <form onSubmit={handleSubmit} className="register-form">
+          <div className="form-group">
+            <label htmlFor="name">{t('register.name')}</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+              className="form-input"
+            />
+          </div>
+
           <div className="form-group">
             <label htmlFor="email">{t('register.email')}</label>
             <input
