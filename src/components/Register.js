@@ -14,6 +14,7 @@ const Register = () => {
     confirmPassword: ''
   });
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
@@ -27,10 +28,11 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setSuccess('');
     setLoading(true);
 
     if (formData.password !== formData.confirmPassword) {
-      setError(t('register.passwordsDontMatch'));
+      setError(t('register.passwordMismatch'));
       setLoading(false);
       return;
     }
@@ -45,9 +47,10 @@ const Register = () => {
       if (response.data.token && response.data.user) {
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.user));
-        navigate('/');
-      } else {
-        setError(t('register.error'));
+        setSuccess(t('register.success'));
+        setTimeout(() => {
+          navigate('/');
+        }, 2000);
       }
     } catch (err) {
       setError(err.response?.data?.message || t('register.error'));
@@ -76,54 +79,64 @@ const Register = () => {
           </div>
         )}
 
+        {success && (
+          <div className="success-message">
+            {success}
+          </div>
+        )}
+
         <form onSubmit={handleSubmit} className="register-form">
           <div className="form-group">
-            <label htmlFor="name">{t('register.name')}</label>
+            <label htmlFor="name">{t('register.nameLabel')}</label>
             <input
               type="text"
               id="name"
               name="name"
               value={formData.name}
               onChange={handleChange}
+              placeholder={t('register.namePlaceholder')}
               required
               className="form-input"
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="email">{t('register.email')}</label>
+            <label htmlFor="email">{t('register.emailLabel')}</label>
             <input
               type="email"
               id="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
+              placeholder={t('register.emailPlaceholder')}
               required
               className="form-input"
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="password">{t('register.password')}</label>
+            <label htmlFor="password">{t('register.passwordLabel')}</label>
             <input
               type="password"
               id="password"
               name="password"
               value={formData.password}
               onChange={handleChange}
+              placeholder={t('register.passwordPlaceholder')}
               required
               className="form-input"
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="confirmPassword">{t('register.confirmPassword')}</label>
+            <label htmlFor="confirmPassword">{t('register.confirmPasswordLabel')}</label>
             <input
               type="password"
               id="confirmPassword"
               name="confirmPassword"
               value={formData.confirmPassword}
               onChange={handleChange}
+              placeholder={t('register.confirmPasswordPlaceholder')}
               required
               className="form-input"
             />
@@ -134,15 +147,12 @@ const Register = () => {
             className="register-button"
             disabled={loading}
           >
-            {loading ? t('register.loading') : t('register.button')}
+            {loading ? t('register.loading') : t('register.registerButton')}
           </button>
         </form>
 
         <p className="login-link">
-          {t('register.haveAccount')}{' '}
-          <a href="/login" className="link">
-            {t('register.login')}
-          </a>
+          {t('register.loginLink')}
         </p>
       </div>
     </div>

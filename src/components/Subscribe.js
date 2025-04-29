@@ -36,6 +36,14 @@ const Subscribe = () => {
     }
   };
 
+  const features = [
+    t('subscription.features.0'),
+    t('subscription.features.1'),
+    t('subscription.features.2'),
+    t('subscription.features.3'),
+    t('subscription.features.4')
+  ];
+
   return (
     <div className="subscribe-container">
       <div className="subscribe-card">
@@ -48,7 +56,7 @@ const Subscribe = () => {
           <p className="plan-description">{t('subscription.planDescription')}</p>
           
           <ul className="features-list">
-            {t('subscription.features', { returnObjects: true }).map((feature, index) => (
+            {features.map((feature, index) => (
               <li key={index} className="feature-item">
                 <span className="check-icon">✓</span>
                 {feature}

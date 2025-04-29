@@ -7,39 +7,48 @@ const TerminosPage = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="terminos-container">
-      <h1>{t('terminos.title')}</h1>
-      
-      <div className="terminos-content">
-        <section>
-          <h2>{t('terminos.introduccion')}</h2>
-          <p>{t('terminos.introduccionTexto')}</p>
-        </section>
+    <div className="terminos-page">
+      <div className="page-header">
+        <h1>{t('terms.title')}</h1>
+      </div>
 
-        <section>
-          <h2>{t('terminos.uso')}</h2>
-          <p>{t('terminos.usoTexto')}</p>
-        </section>
+      <div className="terminos-container">
+        <div className="terminos-content">
+          <section className="terminos-section">
+            <h2>{t('terms.acceptance')}</h2>
+            <p>{t('terms.content')}</p>
+          </section>
 
-        <section>
-          <h2>{t('terminos.suscripcion')}</h2>
-          <p>{t('terminos.suscripcionTexto')}</p>
-        </section>
+          <section className="terminos-section">
+            <h2>{t('terms.serviceDescription')}</h2>
+            <p>{t('terms.serviceContent')}</p>
+          </section>
 
-        <section>
-          <h2>{t('terminos.propiedad')}</h2>
-          <p>{t('terminos.propiedadTexto')}</p>
-        </section>
+          <section className="terminos-section">
+            <h2>{t('terms.userObligations')}</h2>
+            <p>{t('terms.obligationsContent')}</p>
+          </section>
 
-        <section>
-          <h2>{t('terminos.limitacion')}</h2>
-          <p>{t('terminos.limitacionTexto')}</p>
-        </section>
+          <section className="terminos-section">
+            <h2>{t('terms.privacy')}</h2>
+            <p>{t('terms.privacyContent')}</p>
+          </section>
 
-        <section>
-          <h2>{t('terminos.contacto')}</h2>
-          <p>{t('terminos.contactoTexto')}</p>
-        </section>
+          <section className="terminos-section">
+            <h2>{t('terms.cancellation')}</h2>
+            <p>{t('terms.cancellationContent')}</p>
+          </section>
+
+          <section className="terminos-section">
+            <h2>{t('terms.liability')}</h2>
+            <p>{t('terms.liabilityContent')}</p>
+          </section>
+
+          <section className="terminos-section">
+            <h2>{t('terms.changes')}</h2>
+            <p>{t('terms.changesContent')}</p>
+          </section>
+        </div>
       </div>
     </div>
   );

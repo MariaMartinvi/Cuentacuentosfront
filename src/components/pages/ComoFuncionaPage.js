@@ -6,28 +6,32 @@ const ComoFuncionaPage = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="como-funciona-container">
-      <h1>{t('comoFunciona.title')}</h1>
-      
-      <div className="steps-container">
-        <div className="step">
-          <h2>{t('comoFunciona.step1.title')}</h2>
-          <p>{t('comoFunciona.step1.description')}</p>
-        </div>
+    <div className="como-funciona-page">
+      <div className="page-header">
+        <h1>{t('howItWorks.title')}</h1>
+      </div>
 
-        <div className="step">
-          <h2>{t('comoFunciona.step2.title')}</h2>
-          <p>{t('comoFunciona.step2.description')}</p>
-        </div>
+      <div className="como-funciona-container">
+        <div className="como-funciona-content">
+          <div className="steps-container">
+            <div className="step">
+              <div className="step-number">1</div>
+              <h2>{t('howItWorks.step1')}</h2>
+              <p>{t('howItWorks.step1Description')}</p>
+            </div>
 
-        <div className="step">
-          <h2>{t('comoFunciona.step3.title')}</h2>
-          <p>{t('comoFunciona.step3.description')}</p>
-        </div>
+            <div className="step">
+              <div className="step-number">2</div>
+              <h2>{t('howItWorks.step2')}</h2>
+              <p>{t('howItWorks.step2Description')}</p>
+            </div>
 
-        <div className="step">
-          <h2>{t('comoFunciona.step4.title')}</h2>
-          <p>{t('comoFunciona.step4.description')}</p>
+            <div className="step">
+              <div className="step-number">3</div>
+              <h2>{t('howItWorks.step3')}</h2>
+              <p>{t('howItWorks.step3Description')}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

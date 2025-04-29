@@ -61,26 +61,28 @@ const Login = () => {
 
         <form onSubmit={handleSubmit} className="login-form">
           <div className="form-group">
-            <label htmlFor="email">{t('login.email')}</label>
+            <label htmlFor="email">{t('login.emailLabel')}</label>
             <input
               type="email"
               id="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
+              placeholder={t('login.emailPlaceholder')}
               required
               className="form-input"
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="password">{t('login.password')}</label>
+            <label htmlFor="password">{t('login.passwordLabel')}</label>
             <input
               type="password"
               id="password"
               name="password"
               value={formData.password}
               onChange={handleChange}
+              placeholder={t('login.passwordPlaceholder')}
               required
               className="form-input"
             />
@@ -91,15 +93,12 @@ const Login = () => {
             className="login-button"
             disabled={loading}
           >
-            {loading ? t('login.loading') : t('login.button')}
+            {loading ? t('login.loading') : t('login.loginButton')}
           </button>
         </form>
 
         <p className="register-link">
-          {t('login.noAccount')}{' '}
-          <a href="/register" className="link">
-            {t('login.register')}
-          </a>
+          {t('login.registerLink')}
         </p>
       </div>
     </div>

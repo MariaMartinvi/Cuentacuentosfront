@@ -1,110 +1,103 @@
-import React, { useRef } from 'react';
-import emailjs from '@emailjs/browser';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import axios from 'axios';
 import './ContactPage.css';
 
-function ContactPage() {
-  const form = useRef();
+const ContactPage = () => {
   const { t } = useTranslation();
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+  const [status, setStatus] = useState({ type: '', message: '' });
+  const [loading, setLoading] = useState(false);
 
-  const sendEmail = (e) => {
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setStatus({ type: '', message: '' });
 
-    emailjs
-      .sendForm(
-        'service_xcq64id',
-        'template_9ib4dun',
-        form.current,
-        'PmEP-vrauOJhVTHt0'
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-          alert(t('contact.form.success'));
-        },
-        (error) => {
-          console.log(error.text);
-          alert(t('contact.form.error'));
-        }
-      );
-
-    e.target.reset();
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/contact`, formData);
+      setStatus({ type: 'success', message: t('contact.success') });
+      setFormData({ name: '', email: '', message: '' });
+    } catch (error) {
+      setStatus({ type: 'error', message: t('contact.error') });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="contact-page">
       <div className="page-header">
-        <div className="container">
-          <h1>{t('contact.title')}</h1>
-          <p>{t('contact.description')}</p>
-        </div>
+        <h1>{t('contact.title')}</h1>
+        <p>{t('contact.subtitle')}</p>
       </div>
-      
-      <div className="contact-container">
-        <form ref={form} onSubmit={sendEmail} className="contact-form">
-          <div className="form-group">
-            <label htmlFor="name">{t('contact.form.name')}</label>
-            <input 
-              type="text" 
-              id="name" 
-              name="user_name" 
-              placeholder={t('contact.form.namePlaceholder')} 
-              required 
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="email">{t('contact.form.email')}</label>
-            <input 
-              type="email" 
-              id="email" 
-              name="user_email" 
-              placeholder={t('contact.form.emailPlaceholder')} 
-              required 
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="subject">{t('contact.form.subject')}</label>
-            <input 
-              type="text" 
-              id="subject" 
-              name="subject" 
-              placeholder={t('contact.form.subjectPlaceholder')} 
-              required 
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="message">{t('contact.form.message')}</label>
-            <textarea 
-              id="message" 
-              name="message" 
-              placeholder={t('contact.form.messagePlaceholder')} 
-              rows="5" 
-              required
-            ></textarea>
-          </div>
-          <button type="submit" className="submit-btn">
-            {t('contact.form.submit')}
-          </button>
-        </form>
 
-        <div className="contact-info">
-          <h2>{t('contact.info.title')}</h2>
-          <div className="info-item">
-            <h3>{t('contact.info.email')}</h3>
-            <p>{t('contact.info.emailText')}</p>
-          </div>
-          <div className="info-item">
-            <h3>{t('contact.info.location')}</h3>
-            <p>{t('contact.info.locationText')}</p>
-          </div>
-          <div className="info-item">
-            <h3>{t('contact.info.hours')}</h3>
-            <p>{t('contact.info.hoursText')}</p>
-          </div>
+      <div className="contact-container">
+        <div className="contact-content">
+          <form onSubmit={handleSubmit} className="contact-form">
+            <div className="form-group">
+              <label htmlFor="name">{t('contact.nameLabel')}</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder={t('contact.namePlaceholder')}
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="email">{t('contact.emailLabel')}</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder={t('contact.emailPlaceholder')}
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="message">{t('contact.messageLabel')}</label>
+              <textarea
+                id="message"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                placeholder={t('contact.messagePlaceholder')}
+                required
+              />
+            </div>
+
+            {status.message && (
+              <div className={`status-message ${status.type}`}>
+                {status.message}
+              </div>
+            )}
+
+            <button type="submit" disabled={loading} className="submit-button">
+              {loading ? t('contact.loading') : t('contact.sendButton')}
+            </button>
+          </form>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default ContactPage;
