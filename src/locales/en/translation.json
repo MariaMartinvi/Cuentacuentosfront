@@ -241,5 +241,31 @@
     "logout": "Logout",
     "english": "English",
     "spanish": "Spanish"
+  },
+  "register": {
+    "title": "Create Your Account",
+    "subtitle": "Join us to start creating amazing stories",
+    "email": "Email Address",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "button": "Create Account",
+    "loading": "Creating Account...",
+    "haveAccount": "Already have an account?",
+    "login": "Sign in",
+    "error": "An error occurred during registration. Please try again.",
+    "passwordsDontMatch": "Passwords do not match",
+    "freeStories": "Get 2 free audio stories when you register!",
+    "subscribeLater": "To generate more stories, you'll need to subscribe to our premium plan."
+  },
+  "login": {
+    "title": "Login",
+    "subtitle": "Welcome back",
+    "email": "Email",
+    "password": "Password",
+    "button": "Login",
+    "loading": "Logging in...",
+    "noAccount": "Don't have an account?",
+    "register": "Register",
+    "error": "Login error. Please check your credentials."
   }
 } 

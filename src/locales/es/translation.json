@@ -241,5 +241,31 @@
     "progress": "Progreso del audio",
     "download": "Descargar audio",
     "downloadFileName": "historia"
+  },
+  "register": {
+    "title": "Crea Tu Cuenta",
+    "subtitle": "Únete para empezar a crear cuentos increíbles",
+    "email": "Correo Electrónico",
+    "password": "Contraseña",
+    "confirmPassword": "Confirmar Contraseña",
+    "button": "Crear Cuenta",
+    "loading": "Creando Cuenta...",
+    "haveAccount": "¿Ya tienes una cuenta?",
+    "login": "Iniciar Sesión",
+    "error": "Ocurrió un error durante el registro. Por favor, inténtalo de nuevo.",
+    "passwordsDontMatch": "Las contraseñas no coinciden",
+    "freeStories": "¡Obtén 2 cuentos en audio gratis al registrarte!",
+    "subscribeLater": "Para generar más cuentos, necesitarás suscribirte a nuestro plan premium."
+  },
+  "login": {
+    "title": "Iniciar Sesión",
+    "subtitle": "Bienvenido de nuevo",
+    "email": "Correo Electrónico",
+    "password": "Contraseña",
+    "button": "Iniciar Sesión",
+    "loading": "Iniciando sesión...",
+    "noAccount": "¿No tienes una cuenta?",
+    "register": "Regístrate",
+    "error": "Error al iniciar sesión. Por favor, verifica tus credenciales."
   }
 } 
