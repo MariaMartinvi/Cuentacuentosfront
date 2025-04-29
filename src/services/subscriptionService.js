@@ -32,7 +32,7 @@ export const createCheckoutSession = async (email) => {
     console.log('Creating checkout session for:', email);
     console.log('Using API URL:', API_URL);
 
-    // IMPORTANT: Fix the endpoint path here - use /api/stripe/ instead of /api/subscription/
+    // Make sure this is the CORRECT endpoint
     const response = await axiosInstance.post('/api/stripe/create-checkout-session', {
       email
     });
@@ -52,24 +52,23 @@ export const createCheckoutSession = async (email) => {
   }
 };
 
-// Load Stripe
+// Load Stripe with TEST mode key for now
 let stripePromise;
 export const loadStripe = async () => {
   if (!stripePromise) {
-    const publishableKey = isProduction
-      ? 'pk_test_51Plm0fBiI8gG3OUxnzpg4BQF2Hcp9nVLGexD9wfDsXNzIUZTCvbVWD2cQwL6G1d0x27f29zYjmIz9WYDTHIzlPOQ00vUbsODXJ'
-      : 'pk_test_51Plm0fBiI8gG3OUxnzpg4BQF2Hcp9nVLGexD9wfDsXNzIUZTCvbVWD2cQwL6G1d0x27f29zYjmIz9WYDTHIzlPOQ00vUbsODXJ';
+    // IMPORTANT: Use TEST MODE key for testing
+    const publishableKey = 'pk_test_51Plm0fBiI8gG3OUxnzpg4BQF2Hcp9nVLGexD9wfDsXNzIUZTCvbVWD2cQwL6G1d0x27f29zYjmIz9WYDTHIzlPOQ00vUbsODXJ';
     
+    console.log('Initializing Stripe with test mode key');
     stripePromise = loadStripeJs(publishableKey);
   }
   return stripePromise;
 };
 
-// Verify subscription after successful payment
+// Other methods remain the same
 export const verifySubscription = async (sessionId) => {
   try {
     console.log('Verifying subscription with session ID:', sessionId);
-    // Also update this endpoint if needed
     const response = await axiosInstance.get('/api/stripe/success', {
       params: { session_id: sessionId }
     });
@@ -81,7 +80,6 @@ export const verifySubscription = async (sessionId) => {
   }
 };
 
-// Other subscription-related functions
 export const getSubscriptionStatus = async () => {
   try {
     const response = await axiosInstance.get('/api/stripe/subscription-status');
