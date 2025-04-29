@@ -1,43 +1,67 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import axios from 'axios';
+import { useAuth } from '../contexts/AuthContext';
+import { createCheckoutSession, loadStripe } from '../services/subscriptionService';
 import './Subscribe.css';
 
 const Subscribe = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [error, setError] = useState('');
+  const { user } = useAuth();
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (!user) {
+      navigate('/login');
+    }
+  }, [user, navigate]);
 
   const handleSubscribe = async () => {
-    setLoading(true);
-    setError('');
-
     try {
-      const token = localStorage.getItem('token');
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/subscription/create-checkout-session`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        }
-      );
+      setLoading(true);
+      setError(null);
 
-      if (response.data.url) {
-        window.location.href = response.data.url;
-      } else {
-        setError(t('subscription.error'));
+      if (!user?.email) {
+        throw new Error(t('subscription.noEmail'));
+      }
+
+      console.log('Creating checkout session for user:', user.email);
+      const session = await createCheckoutSession(user.email);
+      
+      if (!session?.id) {
+        console.error('Invalid session response:', session);
+        throw new Error(t('subscription.noSession'));
+      }
+
+      console.log('Loading Stripe with session:', session.id);
+      const stripe = await loadStripe();
+      
+      if (!stripe) {
+        throw new Error(t('subscription.stripeLoadError'));
+      }
+
+      console.log('Redirecting to Stripe checkout with session ID:', session.id);
+      const { error: stripeError } = await stripe.redirectToCheckout({
+        sessionId: session.id
+      });
+
+      if (stripeError) {
+        console.error('Stripe redirect error:', stripeError);
+        throw new Error(stripeError.message);
       }
     } catch (err) {
-      setError(err.response?.data?.message || t('subscription.error'));
+      console.error('Subscription error:', err);
+      setError(err.message || t('subscription.error'));
     } finally {
       setLoading(false);
     }
   };
+
+  if (!user) {
+    return null;
+  }
 
   const features = [
     t('subscription.features.0'),
@@ -73,12 +97,6 @@ const Subscribe = () => {
             </div>
           )}
 
-          {success && (
-            <div className="success-message">
-              {t('subscription.success')}
-            </div>
-          )}
-
           <button
             className="subscribe-button"
             onClick={handleSubscribe}
@@ -95,4 +113,4 @@ const Subscribe = () => {
   );
 };
 
-export default Subscribe; 
+export default Subscribe;
