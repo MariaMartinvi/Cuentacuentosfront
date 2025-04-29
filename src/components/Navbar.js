@@ -33,7 +33,7 @@ function Navbar() {
               <span className="user-email">{user.email}</span>
               {user.subscriptionStatus === 'free' && (
                 <Link to="/subscribe" className="subscribe-link">
-                  {{t('subscription.subscribeButton')}}
+                  {t('subscription.subscribeButton')}
                 </Link>
               )}
               {user.subscriptionStatus === 'cancelled' && (
