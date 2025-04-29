@@ -33,9 +33,12 @@ const Login = () => {
         password: formData.password
       });
 
-      if (response.data.token) {
+      if (response.data.token && response.data.user) {
         localStorage.setItem('token', response.data.token);
+        localStorage.setItem('user', JSON.stringify(response.data.user));
         navigate('/');
+      } else {
+        setError(t('login.error'));
       }
     } catch (err) {
       setError(err.response?.data?.message || t('login.error'));
