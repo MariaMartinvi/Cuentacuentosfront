@@ -57,7 +57,7 @@ let stripePromise;
 export const loadStripe = async () => {
   if (!stripePromise) {
     const publishableKey = isProduction
-      ? 'pk_live_51Plm0fBiI8gG3OUx65fNZC8DwIGRCDPSMVbYJEFrK1MzqHiRUcAA79YQhLvgwm1KoL5e3HRomTaqFD0jKVDnj0Yl00OJW7NGcJ'
+      ? 'pk_test_51Plm0fBiI8gG3OUxnzpg4BQF2Hcp9nVLGexD9wfDsXNzIUZTCvbVWD2cQwL6G1d0x27f29zYjmIz9WYDTHIzlPOQ00vUbsODXJ'
       : 'pk_test_51Plm0fBiI8gG3OUxnzpg4BQF2Hcp9nVLGexD9wfDsXNzIUZTCvbVWD2cQwL6G1d0x27f29zYjmIz9WYDTHIzlPOQ00vUbsODXJ';
     
     stripePromise = loadStripeJs(publishableKey);
