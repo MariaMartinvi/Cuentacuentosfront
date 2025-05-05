@@ -7,7 +7,7 @@ function StoryDisplay({ story }) {
   const { t } = useTranslation();
   const [audioUrl, setAudioUrl] = useState(null);
   const [voiceType, setVoiceType] = useState('female');
-  const [speechRate, setSpeechRate] = useState(0.8); // Default to slower speed
+  const [speechRate, setSpeechRate] = useState(0.7); // Default to slow speed
   const [isGeneratingAudio, setIsGeneratingAudio] = useState(false);
 
   if (!story) return null;
@@ -92,7 +92,7 @@ function StoryDisplay({ story }) {
             </select>
           </div>
 
-          <div className="speed-selector">
+          <div className="voice-selector">
             <label htmlFor="speechRate">{t('storyDisplay.speechRate')}</label>
             <select
               id="speechRate"
