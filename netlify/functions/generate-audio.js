@@ -66,7 +66,7 @@ function getGoogleVoiceDetails(voiceId) {
   switch (voiceId) {
     case 'female':
       return {
-        name: 'es-ES-Neural2-A',
+        name: 'es-ES-Neural2-H',
         languageCode: 'es-ES',
         gender: 'FEMALE'
       };
