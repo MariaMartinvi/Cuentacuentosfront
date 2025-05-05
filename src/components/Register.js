@@ -60,8 +60,8 @@ const Register = () => {
   const handleGoogleSignIn = async () => {
     try {
       const apiUrl = process.env.NODE_ENV === 'production'
-        ? 'https://micuentacuentos.com'
-        : process.env.REACT_APP_API_URL;
+        ? 'https://api.micuentacuentos.com'
+        : process.env.REACT_APP_API_URL || 'http://localhost:5001';
       window.location.href = `${apiUrl}/api/auth/google`;
     } catch (err) {
       setError(t('register.error'));
