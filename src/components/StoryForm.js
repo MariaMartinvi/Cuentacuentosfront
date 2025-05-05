@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { generateStory } from '../services/storyService.js';
 import { getCurrentUser } from '../services/authService';
 import { useNavigate } from 'react-router-dom';
+import './StoryForm.css';
 
 function StoryForm({ onStoryGenerated }) {
   const { t, i18n } = useTranslation();
@@ -56,7 +57,13 @@ function StoryForm({ onStoryGenerated }) {
       });
       onStoryGenerated(story);
     } catch (err) {
-      setError(err.message);
+      if (err.response?.data?.error === 'Story limit reached') {
+        setError(t('storyForm.storyLimitReached'));
+      } else if (err.response?.data?.message) {
+        setError(err.response.data.message);
+      } else {
+        setError(t('storyForm.generalError'));
+      }
     } finally {
       setIsLoading(false);
     }

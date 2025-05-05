@@ -53,12 +53,20 @@ export const generateStory = async (storyData) => {
           return makeRequest(true);
         }
 
+        const data = await response.json();
+
         if (!response.ok) {
-          const error = await response.json();
-          throw new Error(error.message || 'Failed to generate story');
+          throw {
+            response: {
+              data: {
+                error: data.error,
+                message: data.message
+              }
+            }
+          };
         }
 
-        return response.json();
+        return data;
       } catch (error) {
         if (error.message === 'Token expired' && !retry) {
           // Token expired, try to refresh
