@@ -286,7 +286,9 @@
     "loading": "Iniciando sesión...",
     "noAccount": "¿No tienes una cuenta?",
     "register": "Regístrate",
-    "error": "Error al iniciar sesión. Por favor, verifica tus credenciales."
+    "error": "Error al iniciar sesión. Por favor, verifica tus credenciales.",
+    "or": "o",
+    "signInWithGoogle": "Iniciar sesión con Google"
   },
  
   "profile": {

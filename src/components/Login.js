@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { login } from '../services/authService';
+import { login, loginWithGoogle } from '../services/authService';
 import { useAuth } from '../contexts/AuthContext';
 import './Login.css';
+
+// Determinar la URL correcta basada en el entorno
+const isProduction = window.location.hostname !== 'localhost';
+const API_URL = isProduction 
+  ? 'https://backmielda.onrender.com'
+  : 'http://localhost:5001';
 
 const Login = () => {
   const { t } = useTranslation();
@@ -57,6 +63,15 @@ const Login = () => {
     }
   };
 
+  const handleGoogleLogin = async () => {
+    try {
+      window.location.href = `${API_URL}/api/auth/google`;
+    } catch (error) {
+      console.error('Google login error:', error);
+      setError(t('login.error'));
+    }
+  };
+
   return (
     <div className="login-container">
       <div className="login-card">
@@ -68,6 +83,19 @@ const Login = () => {
             {error}
           </div>
         )}
+
+        <button 
+          onClick={handleGoogleLogin}
+          className="google-button"
+          disabled={loading}
+        >
+          <img src="/google-icon.svg" alt="Google" />
+          {t('login.signInWithGoogle')}
+        </button>
+
+        <div className="divider">
+          <span>{t('login.or')}</span>
+        </div>
 
         <form onSubmit={handleSubmit} className="login-form">
           <div className="form-group">
@@ -108,7 +136,7 @@ const Login = () => {
         </form>
 
         <p className="register-link">
-          {t('login.registerLink')}
+          {t('login.noAccount')} <Link to="/register">{t('login.register')}</Link>
         </p>
       </div>
     </div>

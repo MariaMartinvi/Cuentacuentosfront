@@ -207,4 +207,31 @@ export const refreshToken = async () => {
     logout(); // Clear user data if refresh fails
     throw error;
   }
+};
+
+export const loginWithGoogle = async () => {
+  try {
+    const response = await fetch(`${API_URL}/auth/google`, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json'
+      },
+      credentials: 'include'
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to initiate Google login');
+    }
+
+    const data = await response.json();
+    
+    // Store the token and user data
+    localStorage.setItem('token', data.token);
+    localStorage.setItem('user', JSON.stringify(data.user));
+    
+    return data;
+  } catch (error) {
+    console.error('Google login error:', error);
+    throw error;
+  }
 }; 

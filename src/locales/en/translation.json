@@ -278,7 +278,11 @@
     "loginButton": "Login",
     "registerLink": "Don't have an account? Register",
     "error": "Invalid email or password",
-    "loading": "Logging in..."
+    "loading": "Logging in...",
+    "noAccount": "Don't have an account?",
+    "register": "Register",
+    "or": "or",
+    "signInWithGoogle": "Sign in with Google"
   },
   "profile": {
     "title": "My Profile",
