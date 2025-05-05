@@ -219,7 +219,13 @@
     "generateAudio": "Generate Audio",
     "generatingAudio": "Generating audio...",
     "copySuccess": "Story copied to clipboard",
-    "audioError": "There was an error generating the audio. Please try again."
+    "audioError": "There was an error generating the audio. Please try again.",
+    "speechRate": "Speech rate:",
+    "speedVerySlow": "Very Slow",
+    "speedSlow": "Slow",
+    "speedNormal": "Normal",
+    "speedFast": "Fast",
+    "speedVeryFast": "Very Fast"
   },
   "homepage": {
     "heroTitle": "Audio stories to learn English while falling asleep.",

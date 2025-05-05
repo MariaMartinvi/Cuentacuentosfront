@@ -7,6 +7,7 @@ function StoryDisplay({ story }) {
   const { t } = useTranslation();
   const [audioUrl, setAudioUrl] = useState(null);
   const [voiceType, setVoiceType] = useState('female');
+  const [speechRate, setSpeechRate] = useState(0.8); // Default to slower speed
   const [isGeneratingAudio, setIsGeneratingAudio] = useState(false);
 
   if (!story) return null;
@@ -35,7 +36,7 @@ function StoryDisplay({ story }) {
       const audioData = await generateAudio({
         text: story.content,
         voiceId: voiceType,
-        speechRate: 1.0
+        speechRate: speechRate
       });
 
       if (!audioData) {
@@ -91,6 +92,22 @@ function StoryDisplay({ story }) {
             </select>
           </div>
 
+          <div className="speed-selector">
+            <label htmlFor="speechRate">{t('storyDisplay.speechRate')}</label>
+            <select
+              id="speechRate"
+              value={speechRate}
+              onChange={(e) => setSpeechRate(parseFloat(e.target.value))}
+              disabled={isGeneratingAudio}
+            >
+              <option value="0.5">{t('storyDisplay.speedVerySlow')}</option>
+              <option value="0.7">{t('storyDisplay.speedSlow')}</option>
+              <option value="0.8">{t('storyDisplay.speedNormal')}</option>
+              <option value="1.0">{t('storyDisplay.speedFast')}</option>
+              <option value="1.2">{t('storyDisplay.speedVeryFast')}</option>
+            </select>
+          </div>
+
           <button
             onClick={handleGenerateAudio}
             disabled={isGeneratingAudio}
@@ -115,17 +132,15 @@ function StoryDisplay({ story }) {
         ))}
       </div>
 
-      <div className="story-actions">
-        <div className="action-section">
-          <div className="action-title">{t('storyDisplay.textOptions')}</div>
-          <div className="text-actions">
-            <button onClick={handleCopyToClipboard}>
-              <span className="btn-icon">📋</span> {t('storyDisplay.copyText')}
-            </button>
-            <button onClick={handleDownloadText}>
-              <span className="btn-icon">💾</span> {t('storyDisplay.downloadText')}
-            </button>
-          </div>
+      <div className="action-section">
+        <div className="action-title">{t('storyDisplay.textOptions')}</div>
+        <div className="text-actions">
+          <button onClick={handleCopyToClipboard}>
+            <span className="btn-icon">📋</span> {t('storyDisplay.copyText')}
+          </button>
+          <button onClick={handleDownloadText}>
+            <span className="btn-icon">💾</span> {t('storyDisplay.downloadText')}
+          </button>
         </div>
       </div>
     </div>
