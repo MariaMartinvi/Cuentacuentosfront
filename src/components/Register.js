@@ -60,7 +60,7 @@ const Register = () => {
   const handleGoogleSignIn = async () => {
     try {
       const apiUrl = process.env.NODE_ENV === 'production'
-        ? 'https://api.micuentacuentos.com'
+        ? 'https://backmielda.onrender.com'
         : process.env.REACT_APP_API_URL || 'http://localhost:5001';
       window.location.href = `${apiUrl}/api/auth/google`;
     } catch (err) {
