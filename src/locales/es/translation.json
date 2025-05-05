@@ -1,11 +1,12 @@
 {
   "subscription": {
     "freeTitle": "Plan Gratuito",
-    "freeDescription": "Te quedan {{remaining}} cuentos gratuitos",
+    "freeDescription": "Te quedan {{remaining}} historias gratuitas",
     "activeTitle": "Plan Premium",
-    "activeDescription": "Te quedan {{remaining}} cuentos este mes",
+    "activeDescription": "Tienes {{remaining}} historias este mes",
     "cancelledTitle": "Suscripción Finalizada",
-    "cancelledDescription": "Tu suscripción ha finalizado. ¡Suscríbete de nuevo para generar más cuentos!",
+    "cancelledDescription": "Tu suscripción ha finalizado. ¡Suscríbete de nuevo para generar más historias!",
+    "storyLimit": "Has alcanzado tu límite de historias. Por favor, suscríbete para generar más historias.",
     "subscribe": {
       "title": "Actualizar a Premium",
       "features": {
@@ -193,7 +194,8 @@
     "speedSlow": "Lenta",
     "speedNormal": "Normal",
     "speedFast": "Rápida",
-    "speedVeryFast": "Muy rápida"
+    "speedVeryFast": "Muy rápida",
+    "audioLimitReached": "Límite de 4 audios generados para una misma historia alcanzado. Genera una nueva historia para crear nuevos audiocuentos."
   },
   "storyForm": {
     "title": "Genera tu Historia",

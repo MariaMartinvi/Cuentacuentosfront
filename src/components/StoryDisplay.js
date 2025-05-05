@@ -9,12 +9,15 @@ function StoryDisplay({ story }) {
   const [voiceType, setVoiceType] = useState('female');
   const [speechRate, setSpeechRate] = useState(0.7); // Default to slow speed
   const [isGeneratingAudio, setIsGeneratingAudio] = useState(false);
+  const [audioCount, setAudioCount] = useState(0);
+  const [alertMessage, setAlertMessage] = useState(null);
 
   if (!story) return null;
 
   const handleCopyToClipboard = () => {
     navigator.clipboard.writeText(story.content);
-    alert(t('storyDisplay.copySuccess'));
+    setAlertMessage(t('storyDisplay.copySuccess'));
+    setTimeout(() => setAlertMessage(null), 3000);
   };
 
   const handleDownloadText = () => {
@@ -28,6 +31,12 @@ function StoryDisplay({ story }) {
   };
 
   const handleGenerateAudio = async () => {
+    if (audioCount >= 4) {
+      setAlertMessage(t('storyDisplay.audioLimitReached'));
+      setTimeout(() => setAlertMessage(null), 5000);
+      return;
+    }
+
     setIsGeneratingAudio(true);
 
     try {
@@ -48,16 +57,19 @@ function StoryDisplay({ story }) {
       if (audioData.audioUrl) {
         console.log("URL de audio recibida:", audioData.audioUrl.substring(0, 50) + "...");
         setAudioUrl(audioData.audioUrl);
+        setAudioCount(prev => prev + 1);
       } else if (audioData.audioData) {
         console.log("Datos de audio recibidos, convirtiendo a URL...");
         setAudioUrl(`data:audio/mp3;base64,${audioData.audioData}`);
+        setAudioCount(prev => prev + 1);
       } else {
         throw new Error("La respuesta del servidor no contiene datos de audio válidos");
       }
 
     } catch (error) {
       console.error('Error generating audio:', error);
-      alert(t('storyDisplay.audioError') + ': ' + error.message);
+      setAlertMessage(t('storyDisplay.audioError') + ': ' + error.message);
+      setTimeout(() => setAlertMessage(null), 5000);
     } finally {
       setIsGeneratingAudio(false);
     }
@@ -65,6 +77,12 @@ function StoryDisplay({ story }) {
 
   return (
     <div className="story-display">
+      {alertMessage && (
+        <div className="alert-message">
+          {alertMessage}
+        </div>
+      )}
+
       <h3>
         <span className="title-icon">📖</span>
         {story.title || t('storyDisplay.title')}
@@ -81,7 +99,7 @@ function StoryDisplay({ story }) {
               id="voiceType"
               value={voiceType}
               onChange={(e) => setVoiceType(e.target.value)}
-              disabled={isGeneratingAudio}
+              disabled={isGeneratingAudio || audioCount >= 4}
             >
               <option value="female">{t('storyDisplay.voiceFemale')}</option>
               <option value="male">{t('storyDisplay.voiceMale')}</option>
@@ -92,13 +110,13 @@ function StoryDisplay({ story }) {
             </select>
           </div>
 
-          <div className="voice-selector">
+          <div className="speed-selector">
             <label htmlFor="speechRate">{t('storyDisplay.speechRate')}</label>
             <select
               id="speechRate"
               value={speechRate}
               onChange={(e) => setSpeechRate(parseFloat(e.target.value))}
-              disabled={isGeneratingAudio}
+              disabled={isGeneratingAudio || audioCount >= 4}
             >
               <option value="0.5">{t('storyDisplay.speedVerySlow')}</option>
               <option value="0.7">{t('storyDisplay.speedSlow')}</option>
@@ -110,7 +128,7 @@ function StoryDisplay({ story }) {
 
           <button
             onClick={handleGenerateAudio}
-            disabled={isGeneratingAudio}
+            disabled={isGeneratingAudio || audioCount >= 4}
             className="generate-audio-btn"
           >
             {isGeneratingAudio ? (
@@ -124,6 +142,11 @@ function StoryDisplay({ story }) {
             )}
           </button>
         </div>
+        {audioCount >= 4 && (
+          <div className="audio-limit-message">
+            {t('storyDisplay.audioLimitReached')}
+          </div>
+        )}
       </div>
 
       <div className="story-content">

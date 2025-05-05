@@ -1,4 +1,5 @@
 import axios from 'axios';
+import i18next from 'i18next';
 
 // Determinar la URL correcta basada en el entorno
 const isProduction = window.location.hostname !== 'localhost';
@@ -111,6 +112,9 @@ export const login = async (email, password) => {
     return response.data;
   } catch (error) {
     console.error('Login error:', error);
+    if (error.response?.status === 401) {
+      throw new Error(i18next.t('login.error'));
+    }
     throw error;
   }
 };

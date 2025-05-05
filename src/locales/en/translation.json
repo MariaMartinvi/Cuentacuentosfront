@@ -6,6 +6,7 @@
     "activeDescription": "You have {{remaining}} stories this month",
     "cancelledTitle": "Subscription Ended",
     "cancelledDescription": "Your subscription has ended. Subscribe again to generate more stories!",
+    "storyLimit": "You have reached your story limit. Please subscribe to generate more stories.",
     "subscribe": {
       "title": "Upgrade to Premium",
       "features": {
@@ -225,7 +226,8 @@
     "speedSlow": "Slow",
     "speedNormal": "Normal",
     "speedFast": "Fast",
-    "speedVeryFast": "Very Fast"
+    "speedVeryFast": "Very Fast",
+    "audioLimitReached": "You have reached the limit of 4 audio versions for this story. Generate a new story to create more audio versions."
   },
   "homepage": {
     "heroTitle": "Audio stories to learn English while falling asleep.",
@@ -265,15 +267,16 @@
     "subscribeLater": "To generate more stories, you'll need to subscribe to our premium plan."
   },
   "login": {
-    "title": "Login",
-    "subtitle": "Welcome back",
-    "email": "Email",
-    "password": "Password",
-    "button": "Login",
-    "loading": "Logging in...",
-    "noAccount": "Don't have an account?",
-    "register": "Register",
-    "error": "Login error. Please check your credentials."
+    "title": "Welcome back",
+    "subtitle": "Sign in to your account",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Enter your email",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "loginButton": "Login",
+    "registerLink": "Don't have an account? Register",
+    "error": "Invalid email or password",
+    "loading": "Logging in..."
   },
   "profile": {
     "title": "My Profile",
