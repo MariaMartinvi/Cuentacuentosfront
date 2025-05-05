@@ -59,7 +59,9 @@ const Register = () => {
 
   const handleGoogleSignIn = async () => {
     try {
-      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5001';
+      const apiUrl = process.env.NODE_ENV === 'production'
+        ? 'https://backmielda.onrender.com'
+        : process.env.REACT_APP_API_URL || 'http://localhost:5001';
       const frontendUrl = window.location.origin;
       window.location.href = `${apiUrl}/api/auth/google?redirect_uri=${encodeURIComponent(frontendUrl)}`;
     } catch (err) {
