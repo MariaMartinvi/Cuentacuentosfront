@@ -49,7 +49,18 @@
     "priceDescription": "9.99€/mes",
     "successTitle": "¡Suscripción Exitosa!",
     "successMessage": "Gracias por suscribirte. Tu cuenta ha sido actualizada con acceso premium.",
-    "redirectMessage": "Serás redirigido a la página principal en 5 segundos..."
+    "redirectMessage": "Serás redirigido a la página principal en 5 segundos...",
+    "planTitle": "Plan Premium",
+    "planDescription": "Por solo 5€ al mes, genera 30 audiocuentos en cualquier idioma",
+    "features": {
+      "0": "30 audiocuentos mensuales",
+      "1": "Cuentos en español e inglés",
+      "2": "Diferentes voces y acentos",
+      "3": "Soporte prioritario",
+      "4": "Acceso a todas las funciones premium"
+    },
+    "cancelInfo": "Puedes cancelar tu suscripción en cualquier momento. El acceso premium continuará hasta el final del período pagado.",
+    "paymentInfo": "Pago seguro procesado por Stripe. No almacenamos información de tu tarjeta."
   },
   "auth": {
     "login": "Iniciar Sesión",
