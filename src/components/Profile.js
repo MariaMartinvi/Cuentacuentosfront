@@ -64,11 +64,6 @@ const Profile = () => {
         
         <div className="profile-info">
           <div className="info-group">
-            <label>{t('profile.name')}</label>
-            <p>{user.name || user.email}</p>
-          </div>
-          
-          <div className="info-group">
             <label>{t('profile.email')}</label>
             <p>{user.email}</p>
           </div>
