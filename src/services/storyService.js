@@ -26,7 +26,7 @@ const fetchConfig = {
 
 export const generateStory = async (storyData) => {
   try {
-    const user = getCurrentUser();
+    const user = await getCurrentUser();
     if (!user) {
       throw new Error('User not authenticated');
     }

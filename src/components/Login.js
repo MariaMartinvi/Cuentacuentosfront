@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import axios from 'axios';
+import { login } from '../services/authService';
+import { useAuth } from '../contexts/AuthContext';
 import './Login.css';
 
 const Login = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { refreshUser } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -24,24 +26,32 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('Form submitted with data:', formData);
     setError('');
     setLoading(true);
 
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/login`, {
-        email: formData.email,
-        password: formData.password
-      });
+      console.log('Calling login function...');
+      const response = await login(formData.email, formData.password);
+      console.log('Login response received:', response);
 
-      if (response.data.token && response.data.user) {
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('user', JSON.stringify(response.data.user));
+      if (response && response.token) {
+        console.log('Token received, checking localStorage...');
+        const token = localStorage.getItem('token');
+        const user = localStorage.getItem('user');
+        console.log('Token in localStorage:', token ? 'Exists' : 'Not found');
+        console.log('User in localStorage:', user ? 'Exists' : 'Not found');
+
+        console.log('Refreshing user context...');
+        await refreshUser();
+        console.log('Navigation to home...');
         navigate('/');
       } else {
-        setError(t('login.error'));
+        throw new Error('Invalid response from server');
       }
     } catch (err) {
-      setError(err.response?.data?.message || t('login.error'));
+      console.error('Login error:', err);
+      setError(err.message || t('login.error'));
     } finally {
       setLoading(false);
     }

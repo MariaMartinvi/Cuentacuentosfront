@@ -8,7 +8,6 @@ const Register = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: '',
     email: '',
     password: '',
     confirmPassword: ''
@@ -39,7 +38,6 @@ const Register = () => {
 
     try {
       const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/register`, {
-        name: formData.name,
         email: formData.email,
         password: formData.password
       });
@@ -53,7 +51,8 @@ const Register = () => {
         }, 2000);
       }
     } catch (err) {
-      setError(err.response?.data?.message || t('register.error'));
+      console.error('Registration error:', err);
+      setError(err.response?.data?.error || t('register.error'));
     } finally {
       setLoading(false);
     }
@@ -86,20 +85,6 @@ const Register = () => {
         )}
 
         <form onSubmit={handleSubmit} className="register-form">
-          <div className="form-group">
-            <label htmlFor="name">{t('register.nameLabel')}</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              placeholder={t('register.namePlaceholder')}
-              required
-              className="form-input"
-            />
-          </div>
-
           <div className="form-group">
             <label htmlFor="email">{t('register.emailLabel')}</label>
             <input

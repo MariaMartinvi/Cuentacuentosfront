@@ -29,39 +29,12 @@ const Subscribe = () => {
 
       console.log('Subscribe: Creating checkout session for user:', user.email);
       
-      // Create checkout session
-      const session = await createCheckoutSession(user.email);
+      // Create checkout session and redirect
+      await createCheckoutSession(user.email);
       
-      if (!session?.id) {
-        console.error('Invalid session response:', session);
-        throw new Error('Invalid session response from server');
-      }
-
-      console.log('Subscribe: Session created successfully with ID:', session.id);
-      
-      // Load Stripe
-      console.log('Subscribe: Loading Stripe...');
-      const stripe = await loadStripe();
-      
-      if (!stripe) {
-        throw new Error('Failed to load Stripe');
-      }
-      
-      console.log('Subscribe: Stripe loaded successfully');
-      
-      // Redirect to Checkout
-      console.log('Subscribe: Redirecting to Stripe checkout...');
-      const { error: stripeError } = await stripe.redirectToCheckout({
-        sessionId: session.id
-      });
-
-      if (stripeError) {
-        console.error('Stripe redirect error:', stripeError);
-        throw new Error(stripeError.message);
-      }
-    } catch (err) {
-      console.error('Subscription error:', err);
-      setError(err.message || 'An error occurred during subscription');
+    } catch (error) {
+      console.error('Subscribe error:', error);
+      setError(error.message || 'Something went wrong');
     } finally {
       setLoading(false);
     }

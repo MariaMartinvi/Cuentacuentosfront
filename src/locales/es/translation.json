@@ -30,7 +30,7 @@
     "resubscribe": "Reactivar Suscripción",
     "processing": "Procesando...",
     "error": "Ocurrió un error. Por favor, inténtalo de nuevo.",
-    "title": "Suscripción",
+    "title": "Suscripción Premium",
     "description": "Obtén acceso ilimitado a todas las funciones y genera cuentos sin límites",
     "featuresTitle": "Características Premium",
     "feature1": "Generación ilimitada de cuentos",
@@ -224,16 +224,7 @@
     "audioConversionTitle": "Audio en Diferentes Voces",
     "audioConversionDescription": "Convierte tus historias en audio con diferentes voces y acentos."
   },
-  "navbar": {
-    "home": "Inicio",
-    "about": "Sobre Nosotros",
-    "contact": "Contacto",
-    "login": "Iniciar Sesión",
-    "register": "Registrarse",
-    "logout": "Cerrar Sesión",
-    "english": "English",
-    "spanish": "Español"
-  },
+
   "audioPlayer": {
     "title": "Reproductor de Audio",
     "play": "Reproducir",
@@ -245,6 +236,8 @@
   "register": {
     "title": "Crea Tu Cuenta",
     "subtitle": "Únete para empezar a crear cuentos increíbles",
+    "name": "Nombre",
+    "namePlaceholder": "Tu nombre",
     "email": "Correo Electrónico",
     "password": "Contraseña",
     "confirmPassword": "Confirmar Contraseña",
@@ -267,5 +260,37 @@
     "noAccount": "¿No tienes una cuenta?",
     "register": "Regístrate",
     "error": "Error al iniciar sesión. Por favor, verifica tus credenciales."
+  },
+ 
+  "profile": {
+    "title": "Perfil",
+    "name": "Nombre",
+    "email": "Correo Electrónico",
+    "subscriptionStatus": "Estado de Suscripción",
+    "status": {
+      "active": "Activa",
+      "cancelled": "Cancelada",
+      "inactive": "Inactiva"
+    },
+    "cancelSubscription": "Cancelar Suscripción",
+    "cancelInfo": "Tu suscripción seguirá activa hasta el final del período actual.",
+    "loading": "Cargando...",
+    "error": "Ha ocurrido un error. Por favor, inténtalo de nuevo.",
+    "subscriptionCancelled": "Suscripción cancelada exitosamente"
+  },
+  "navbar": {
+    "appName": "MiCuentaCuentos",
+    "home": "Inicio",
+    "stories": "Cuentos",
+    "create": "Crear",
+    "profile": "Perfil",
+    "contact": "Contacto",
+    "subscribe": "Suscribirse",
+    "login": "Iniciar sesión",
+    "register": "Registrarse",
+    "logout": "Cerrar sesión",
+    "english": "Learn English",
+    "spanish": "Aprende Español"
   }
+  
 } 

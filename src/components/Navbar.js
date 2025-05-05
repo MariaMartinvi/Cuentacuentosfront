@@ -1,19 +1,21 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../contexts/AuthContext';
+import { logout } from '../services/authService';
 
 function Navbar() {
   const { i18n, t } = useTranslation();
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem('user'));
+  const { user, setUser } = useAuth();
 
   const changeLanguage = (language) => {
     i18n.changeLanguage(language);
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    logout();
+    setUser(null);
     navigate('/login');
   };
 
@@ -32,15 +34,13 @@ function Navbar() {
             <>
               <Link to="/profile" className="user-name">
                 {user.name || user.email}
+                {user.isPremium && (
+                  <span className="premium-badge">⭐ Premium</span>
+                )}
               </Link>
-              {user.subscriptionStatus === 'free' && (
+              {!user.isPremium && (
                 <Link to="/subscribe" className="subscribe-link">
                   {t('subscription.subscribeButton')}
-                </Link>
-              )}
-              {user.subscriptionStatus === 'cancelled' && (
-                <Link to="/subscribe" className="subscribe-link">
-                  {t('subscription.resubscribe')}
                 </Link>
               )}
               <button onClick={handleLogout} className="logout-button">
@@ -49,12 +49,8 @@ function Navbar() {
             </>
           ) : (
             <>
-              <Link to="/login" className="auth-link">
-                {t('navbar.login')}
-              </Link>
-              <Link to="/register" className="auth-link">
-                {t('navbar.register')}
-              </Link>
+              <Link to="/login">{t('navbar.login')}</Link>
+              <Link to="/register">{t('navbar.register')}</Link>
             </>
           )}
           <button

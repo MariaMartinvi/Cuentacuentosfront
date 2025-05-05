@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { generateStory } from '../services/storyService.js';
 import { getCurrentUser } from '../services/authService';
@@ -7,7 +7,9 @@ import { useNavigate } from 'react-router-dom';
 function StoryForm({ onStoryGenerated }) {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
-  const user = getCurrentUser();
+  const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   
   const [topic, setTopic] = useState('');
   const [storyLength, setStoryLength] = useState('medium');
@@ -16,8 +18,19 @@ function StoryForm({ onStoryGenerated }) {
   const [ageGroup, setAgeGroup] = useState('default');
   const [childNames, setChildNames] = useState('');
   const [englishLevel, setEnglishLevel] = useState('intermediate');
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const loadUser = async () => {
+      try {
+        const currentUser = await getCurrentUser();
+        setUser(currentUser);
+      } catch (error) {
+        console.error('Error loading user:', error);
+        setError(t('storyForm.loginRequired'));
+      }
+    };
+    loadUser();
+  }, [t]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

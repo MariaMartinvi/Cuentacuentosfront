@@ -6,6 +6,13 @@ const API_URL = isProduction
   ? 'https://backmielda.onrender.com'
   : 'http://localhost:5001';
 
+// Cache para getCurrentUser
+let userCache = {
+  data: null,
+  timestamp: null,
+  CACHE_DURATION: 5000 // 5 segundos
+};
+
 // Configure axios defaults
 const axiosInstance = axios.create({
   baseURL: API_URL,
@@ -15,6 +22,27 @@ const axiosInstance = axios.create({
     'Accept': 'application/json'
   }
 });
+
+// Interceptor para agregar el token a las peticiones
+axiosInstance.interceptors.request.use(config => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+// Interceptor para manejar errores de red
+axiosInstance.interceptors.response.use(
+  response => response,
+  error => {
+    if (error.code === 'ERR_NETWORK') {
+      console.error('Network error - Unable to connect to the server');
+      throw new Error('Unable to connect to the server. Please check if the backend server is running.');
+    }
+    return Promise.reject(error);
+  }
+);
 
 export const register = async (email, password) => {
   try {
@@ -49,8 +77,7 @@ export const register = async (email, password) => {
 
 export const login = async (email, password) => {
   try {
-    console.log('Logging in user:', email);
-    console.log('API URL:', API_URL);
+    console.log('Making login request to:', `${API_URL}/api/auth/login`);
     const response = await axiosInstance.post('/api/auth/login', {
       email,
       password
@@ -63,30 +90,28 @@ export const login = async (email, password) => {
     }
 
     const { token, user } = response.data;
+    
+    // Guardar token y usuario en localStorage
     localStorage.setItem('token', token);
     localStorage.setItem('user', JSON.stringify(user));
     
-    console.log('Login successful for user:', user.email);
+    // Limpiar caché al hacer login
+    userCache = {
+      data: user,
+      timestamp: Date.now()
+    };
+    
+    // Verificar que se guardaron correctamente
+    const savedToken = localStorage.getItem('token');
+    const savedUser = localStorage.getItem('user');
+    
+    console.log('Token saved in localStorage:', savedToken ? 'Yes' : 'No');
+    console.log('User saved in localStorage:', savedUser ? 'Yes' : 'No');
+    
     return response.data;
   } catch (error) {
-    console.error('Login error:', {
-      message: error.message,
-      response: error.response?.data,
-      status: error.response?.status,
-      url: `${API_URL}/api/auth/login`,
-      email: email,
-      error: error
-    });
-    
-    if (error.response?.data?.error) {
-      throw new Error(error.response.data.error);
-    } else if (error.response?.data?.details) {
-      throw new Error(`${error.response.data.error}: ${error.response.data.details}`);
-    } else if (!error.response) {
-      throw new Error('Network error - Unable to connect to the server. Please check if the backend server is running.');
-    } else {
-      throw new Error(error.message || 'Login failed');
-    }
+    console.error('Login error:', error);
+    throw error;
   }
 };
 
@@ -95,14 +120,50 @@ export const logout = () => {
   console.log('Logging out user:', user?.email);
   localStorage.removeItem('token');
   localStorage.removeItem('user');
+  // Limpiar caché al hacer logout
+  userCache = {
+    data: null,
+    timestamp: null
+  };
 };
 
-export const getCurrentUser = () => {
+export const getCurrentUser = async () => {
   try {
-    const user = localStorage.getItem('user');
-    return user ? JSON.parse(user) : null;
+    const token = localStorage.getItem('token');
+    console.log('Checking token in getCurrentUser:', token ? 'Token exists' : 'No token found');
+    
+    if (!token) {
+      userCache = { data: null, timestamp: null };
+      return null;
+    }
+
+    // Verificar si hay datos en caché y si son válidos
+    const now = Date.now();
+    if (userCache.data && userCache.timestamp && (now - userCache.timestamp < userCache.CACHE_DURATION)) {
+      console.log('Returning cached user data');
+      return userCache.data;
+    }
+
+    console.log('Making request to /api/auth/me with token');
+    const response = await axiosInstance.get('/api/auth/me', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    console.log('Response from /api/auth/me:', response.data);
+    
+    // Actualizar caché
+    userCache = {
+      data: response.data,
+      timestamp: now
+    };
+    
+    return response.data;
   } catch (error) {
-    console.error('Error getting current user:', error);
+    console.error('Error in getCurrentUser:', error);
+    // En caso de error, limpiar caché
+    userCache = { data: null, timestamp: null };
     return null;
   }
 };

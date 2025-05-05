@@ -16,44 +16,40 @@ const AboutPage = () => {
       <div className="about-container">
         <div className="about-content">
           <div className="about-text">
-            <h2>{t('about.missionTitle')}</h2>
-            <p>{t('about.missionText')}</p>
+            <h2>{t('about.mission.title')}</h2>
+            <p>{t('about.mission.text')}</p>
           </div>
         </div>
 
         <div className="about-content">
           <div className="about-text">
-            <h2>{t('about.visionTitle')}</h2>
-            <p>{t('about.visionText')}</p>
+            <h2>{t('about.vision.title')}</h2>
+            <p>{t('about.vision.text')}</p>
           </div>
         </div>
 
         <div className="about-content">
           <div className="about-text">
-            <h2>{t('about.teamTitle')}</h2>
-            <p>{t('about.teamText')}</p>
+            <h2>{t('about.team.title')}</h2>
+            <p>{t('about.team.text')}</p>
           </div>
         </div>
 
         <div className="about-content">
           <div className="about-text">
-            <h2>{t('about.valuesTitle')}</h2>
+            <h2>{t('about.values.title')}</h2>
             <div className="values-grid">
               <div className="value-item">
-                <h3>{t('about.values.creativity')}</h3>
-                <p>{t('about.values.creativityText')}</p>
+                <h3>{t('about.values.creatividad')}</h3>
+                <p>{t('about.values.creatividadText')}</p>
               </div>
               <div className="value-item">
-                <h3>{t('about.values.education')}</h3>
-                <p>{t('about.values.educationText')}</p>
+                <h3>{t('about.values.accesibilidad')}</h3>
+                <p>{t('about.values.accesibilidadText')}</p>
               </div>
               <div className="value-item">
-                <h3>{t('about.values.innovation')}</h3>
-                <p>{t('about.values.innovationText')}</p>
-              </div>
-              <div className="value-item">
-                <h3>{t('about.values.quality')}</h3>
-                <p>{t('about.values.qualityText')}</p>
+                <h3>{t('about.values.calidad')}</h3>
+                <p>{t('about.values.calidadText')}</p>
               </div>
             </div>
           </div>

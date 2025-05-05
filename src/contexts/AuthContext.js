@@ -10,40 +10,68 @@ export const AuthProvider = ({ children }) => {
   const refreshUser = async () => {
     try {
       const currentUser = await getCurrentUser();
-      setUser(currentUser);
-      return currentUser;
+      if (currentUser) {
+        // Ensure isPremium is set based on subscription status
+        currentUser.isPremium = currentUser.subscriptionStatus === 'active';
+        setUser(currentUser);
+      } else {
+        setUser(null);
+      }
     } catch (error) {
-      console.error('Error refreshing user data:', error);
-      return null;
+      console.error('Error refreshing user:', error);
+      setUser(null);
+    }
+  };
+
+  const initializeAuth = async () => {
+    try {
+      const currentUser = await getCurrentUser();
+      if (currentUser) {
+        // Ensure isPremium is set based on subscription status
+        currentUser.isPremium = currentUser.subscriptionStatus === 'active';
+        setUser(currentUser);
+      }
+    } catch (error) {
+      console.error('Error initializing auth:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    const initializeAuth = async () => {
-      try {
-        const currentUser = await getCurrentUser();
-        setUser(currentUser);
-      } catch (error) {
-        console.error('Error initializing auth:', error);
-        setUser(null);
-      } finally {
-        setLoading(false);
+    initializeAuth();
+  }, []);
+
+  // Escuchar cambios en localStorage para actualizar el estado del usuario
+  useEffect(() => {
+    const handleStorageChange = (e) => {
+      if (e.key === 'user') {
+        try {
+          const newUserData = JSON.parse(e.newValue);
+          if (newUserData) {
+            setUser(newUserData);
+          }
+        } catch (error) {
+          console.error('Error parsing user data:', error);
+        }
       }
     };
 
-    initializeAuth();
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
   }, []);
 
   const value = {
     user,
     loading,
     setUser,
-    refreshUser // Add this function to the context
+    refreshUser,
+    isAuthenticated: !!user
   };
 
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
+      {children}
     </AuthContext.Provider>
   );
 };

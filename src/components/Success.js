@@ -37,14 +37,9 @@ const Success = () => {
         console.log('Subscription verification response:', response.data);
         
         if (response.data.success) {
-          // Update local storage with new user data
-          const currentUser = JSON.parse(localStorage.getItem('user'));
-          if (currentUser) {
-            currentUser.subscriptionStatus = 'active';
-            currentUser.storiesRemaining = 30; // 30 stories for subscribers
-            currentUser.subscriptionType = 'premium';
-            localStorage.setItem('user', JSON.stringify(currentUser));
-          }
+          // Update local storage with new user data from backend
+          const updatedUser = response.data.user;
+          localStorage.setItem('user', JSON.stringify(updatedUser));
 
           // Refresh user data to get updated subscription status
           await refreshUser();

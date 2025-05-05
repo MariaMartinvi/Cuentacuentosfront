@@ -233,14 +233,15 @@
     "audioConversionDescription": "Convert your stories to audio with different voices and accents."
   },
   "navbar": {
+    "appName": "MyStoryTeller",
     "home": "Home",
-    "about": "About",
-    "contact": "Contact",
+    "stories": "Stories",
+    "create": "Create",
+    "profile": "Profile",
+    "subscribe": "Subscribe",
     "login": "Login",
     "register": "Register",
-    "logout": "Logout",
-    "english": "English",
-    "spanish": "Spanish"
+    "logout": "Logout"
   },
   "register": {
     "title": "Create Your Account",
@@ -267,5 +268,23 @@
     "noAccount": "Don't have an account?",
     "register": "Register",
     "error": "Login error. Please check your credentials."
+  },
+  "profile": {
+    "title": "My Profile",
+    "name": "Name",
+    "email": "Email",
+    "subscriptionStatus": "Subscription status",
+    "subscriptionActive": "Subscribed - Premium Plan",
+    "subscriptionCancelled": "Subscription cancelled",
+    "subscriptionNone": "Not subscribed",
+    "subscriptionFree": "Free",
+    "subscriptionTrialing": "Trial period",
+    "cancelSubscription": "Cancel subscription",
+    "cancelling": "Cancelling...",
+    "noActiveSubscription": "You don't have an active subscription",
+    "cancelError": "Error cancelling subscription",
+    "subscriptionCancelled": "Subscription cancelled successfully",
+    "subscribe": "Subscribe now",
+    "loading": "Loading..."
   }
 } 
