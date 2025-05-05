@@ -4,7 +4,7 @@ import { loadStripe as loadStripeJs } from '@stripe/stripe-js';
 // Determine the correct API URL based on environment
 const isProduction = window.location.hostname !== 'localhost';
 const API_URL = isProduction 
-  ? 'https://backmielda.onrender.com'
+  ? 'https://generadorcuentos.onrender.com'
   : 'http://localhost:5001';
 
 // Configure axios defaults

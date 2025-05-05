@@ -55,7 +55,7 @@ export const generateAudio = async (options) => {
     // Determine the correct URL based on environment
     const isProduction = window.location.hostname !== 'localhost';
     const audioFunctionUrl = isProduction 
-      ? 'https://backmielda.onrender.com/api/audio/generate'
+      ? 'https://generadorcuentos.onrender.com/api/audio/generate'
       : 'http://localhost:5001/api/audio/generate';
 
     console.log('🌐 URL de la función de audio:', audioFunctionUrl);

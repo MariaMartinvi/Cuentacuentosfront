@@ -4,12 +4,12 @@ import { getAuthHeader, getCurrentUser, refreshToken } from './authService';
 // Determinar la URL correcta basada en el entorno
 const isProduction = window.location.hostname !== 'localhost';
 const API_URL = isProduction 
-  ? 'https://backmielda.onrender.com/api'
+  ? 'https://generadorcuentos.onrender.com/api'
   : 'http://localhost:5001/api';
 
 // URL base para el backend
 const backendBaseUrl = isProduction
-  ? 'https://backmielda.onrender.com'
+  ? 'https://generadorcuentos.onrender.com'
   : 'http://localhost:5001';
 
 // Configuración común para fetch

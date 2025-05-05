@@ -8,7 +8,7 @@ import './Login.css';
 // Determinar la URL correcta basada en el entorno
 const isProduction = window.location.hostname !== 'localhost';
 const API_URL = isProduction 
-  ? 'https://backmielda.onrender.com'
+  ? 'https://generadorcuentos.onrender.com'
   : 'http://localhost:5001';
 
 const Login = () => {
