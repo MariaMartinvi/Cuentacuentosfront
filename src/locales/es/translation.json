@@ -29,6 +29,7 @@
     },
     "resubscribe": "Reactivar Suscripción",
     "processing": "Procesando...",
+    "loading": "Cargando...",
     "error": "Ocurrió un error. Por favor, inténtalo de nuevo.",
     "title": "Suscripción Premium",
     "description": "Obtén acceso ilimitado a todas las funciones y genera cuentos sin límites",
@@ -283,6 +284,7 @@
     "email": "Correo Electrónico",
     "subscriptionStatus": "Estado de Suscripción",
     "status": {
+      "free": "Plan Gratuito",
       "active": "Activa",
       "cancelled": "Cancelada",
       "inactive": "Inactiva"
