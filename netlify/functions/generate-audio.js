@@ -66,7 +66,7 @@ function getGoogleVoiceDetails(voiceId) {
   switch (voiceId) {
     case 'female':
       return {
-        name: 'es-ES-Standard-A',
+        name: 'es-ES-Neural2-A',
         languageCode: 'es-ES',
         gender: 'FEMALE'
       };
@@ -78,13 +78,13 @@ function getGoogleVoiceDetails(voiceId) {
       };
     case 'female-latam':
       return {
-        name: 'es-US-Standard-A',
+        name: 'es-US-Neural2-A',
         languageCode: 'es-US',
         gender: 'FEMALE'
       };
     case 'female-english':
       return {
-        name: 'en-US-Standard-A',
+        name: 'en-US-Neural2-F',
         languageCode: 'en-US',
         gender: 'FEMALE'
       };
@@ -102,7 +102,7 @@ function getGoogleVoiceDetails(voiceId) {
       };
     default:
       return {
-        name: 'es-ES-Standard-A',
+        name: 'es-ES-Neural2-A',
         languageCode: 'es-ES',
         gender: 'FEMALE'
       };

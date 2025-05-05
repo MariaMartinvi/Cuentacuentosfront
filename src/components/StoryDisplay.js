@@ -1,16 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import AudioPlayer from './AudioPlayer.js';
 import { generateAudio } from '../services/audioService.js';
 
 function StoryDisplay({ story }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [audioUrl, setAudioUrl] = useState(null);
-  const [voiceType, setVoiceType] = useState('female');
+  const [voiceType, setVoiceType] = useState(i18n.language === 'en' ? 'female-english' : 'female');
   const [speechRate, setSpeechRate] = useState(0.7); // Default to slow speed
   const [isGeneratingAudio, setIsGeneratingAudio] = useState(false);
   const [audioCount, setAudioCount] = useState(0);
   const [alertMessage, setAlertMessage] = useState(null);
+
+  // Reset audio count when story changes
+  useEffect(() => {
+    setAudioCount(0);
+    setAudioUrl(null);
+  }, [story]);
+
+  // Update voice type when language changes
+  useEffect(() => {
+    setVoiceType(i18n.language === 'en' ? 'female-english' : 'female');
+  }, [i18n.language]);
 
   if (!story) return null;
 
@@ -85,7 +96,7 @@ function StoryDisplay({ story }) {
 
       <h3>
         <span className="title-icon">📖</span>
-        {story.title || t('storyDisplay.title')}
+        {story.title || (i18n.language === 'en' ? 'Your Story' : t('storyDisplay.title'))}
       </h3>
 
       {audioUrl && <AudioPlayer audioUrl={audioUrl} />}
