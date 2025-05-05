@@ -110,7 +110,7 @@ function StoryDisplay({ story }) {
             </select>
           </div>
 
-          <div className="speed-selector">
+          <div className="voice-selector">
             <label htmlFor="speechRate">{t('storyDisplay.speechRate')}</label>
             <select
               id="speechRate"
@@ -144,7 +144,7 @@ function StoryDisplay({ story }) {
         </div>
         {audioCount >= 4 && (
           <div className="audio-limit-message">
-            {t('storyDisplay.audioLimitReached')}
+            <p>{t('storyDisplay.audioLimitReached')}</p>
           </div>
         )}
       </div>
