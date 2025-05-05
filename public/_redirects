@@ -1,1 +1,7 @@
-/*    /index.html   200
+# Force HTTPS
+http://micuentacuentos.com/* https://www.micuentacuentos.com/:splat 301!
+http://www.micuentacuentos.com/* https://www.micuentacuentos.com/:splat 301!
+https://micuentacuentos.com/* https://www.micuentacuentos.com/:splat 301!
+
+# Handle client-side routing
+/* /index.html 200
