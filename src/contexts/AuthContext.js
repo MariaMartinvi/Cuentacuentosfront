@@ -1,11 +1,30 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { getCurrentUser } from '../services/authService';
+import axios from 'axios';
 
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const login = async (token) => {
+    try {
+      // Configurar el token en axios para futuras peticiones
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      
+      // Obtener la información del usuario
+      const currentUser = await getCurrentUser();
+      if (currentUser) {
+        // Ensure isPremium is set based on subscription status
+        currentUser.isPremium = currentUser.subscriptionStatus === 'active';
+        setUser(currentUser);
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+      throw error;
+    }
+  };
 
   const refreshUser = async () => {
     try {
@@ -25,11 +44,17 @@ export const AuthProvider = ({ children }) => {
 
   const initializeAuth = async () => {
     try {
-      const currentUser = await getCurrentUser();
-      if (currentUser) {
-        // Ensure isPremium is set based on subscription status
-        currentUser.isPremium = currentUser.subscriptionStatus === 'active';
-        setUser(currentUser);
+      const token = localStorage.getItem('token');
+      if (token) {
+        // Configurar el token en axios para futuras peticiones
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        
+        const currentUser = await getCurrentUser();
+        if (currentUser) {
+          // Ensure isPremium is set based on subscription status
+          currentUser.isPremium = currentUser.subscriptionStatus === 'active';
+          setUser(currentUser);
+        }
       }
     } catch (error) {
       console.error('Error initializing auth:', error);
@@ -66,6 +91,7 @@ export const AuthProvider = ({ children }) => {
     loading,
     setUser,
     refreshUser,
+    login,
     isAuthenticated: !!user
   };
 

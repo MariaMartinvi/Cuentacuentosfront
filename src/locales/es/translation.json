@@ -261,7 +261,9 @@
     "error": "Ocurrió un error durante el registro. Por favor, inténtalo de nuevo.",
     "passwordsDontMatch": "Las contraseñas no coinciden",
     "freeStories": "¡Obtén 2 cuentos en audio gratis al registrarte!",
-    "subscribeLater": "Para generar más cuentos, necesitarás suscribirte a nuestro plan premium."
+    "subscribeLater": "Para generar más cuentos, necesitarás suscribirte a nuestro plan premium.",
+    "signInWithGoogle": "Registrarse con Google",
+    "or": "o"
   },
   "login": {
     "title": "Iniciar Sesión",

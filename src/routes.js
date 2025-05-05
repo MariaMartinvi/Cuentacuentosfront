@@ -14,6 +14,7 @@ import ContactPage from './components/pages/ContactPage';
 import TerminosPage from './components/pages/TerminosPage';
 import PoliticaPage from './components/pages/PoliticaPage';
 import ComoFuncionaPage from './components/pages/ComoFuncionaPage';
+import GoogleCallback from './components/GoogleCallback';
 import { useAuth } from './contexts/AuthContext';
 
 // Componente wrapper para rutas privadas usando el hook useAuth
@@ -60,6 +61,7 @@ const AppRoutes = () => {
           <Route path="/terminos" element={<TerminosPage />} />
           <Route path="/politica" element={<PoliticaPage />} />
           <Route path="/como-funciona" element={<ComoFuncionaPage />} />
+          <Route path="/auth/google/callback" element={<GoogleCallback />} />
           <Route path="/login" element={
             <PublicRoute>
               <Login />

@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
+import { useAuth } from '../contexts/AuthContext';
 import './Register.css';
 
 const Register = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -17,11 +19,10 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -31,7 +32,7 @@ const Register = () => {
     setLoading(true);
 
     if (formData.password !== formData.confirmPassword) {
-      setError(t('register.passwordMismatch'));
+      setError(t('register.passwordsDontMatch'));
       setLoading(false);
       return;
     }
@@ -42,19 +43,25 @@ const Register = () => {
         password: formData.password
       });
 
-      if (response.data.token && response.data.user) {
+      if (response.data.token) {
         localStorage.setItem('token', response.data.token);
-        localStorage.setItem('user', JSON.stringify(response.data.user));
+        await login(response.data.token);
         setSuccess(t('register.success'));
-        setTimeout(() => {
-          navigate('/');
-        }, 2000);
+        navigate('/');
       }
     } catch (err) {
       console.error('Registration error:', err);
-      setError(err.response?.data?.error || t('register.error'));
+      setError(err.response?.data?.message || t('register.error'));
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      window.location.href = `${process.env.REACT_APP_API_URL}/api/auth/google`;
+    } catch (err) {
+      setError(t('register.error'));
     }
   };
 
@@ -70,6 +77,22 @@ const Register = () => {
             <p className="free-stories-title">{t('register.freeStories')}</p>
             <p className="free-stories-subtitle">{t('register.subscribeLater')}</p>
           </div>
+        </div>
+
+        <button 
+          className="google-signin-button"
+          onClick={handleGoogleSignIn}
+        >
+          <img 
+            src="https://www.google.com/images/branding/googleg/1x/googleg_standard_color_128dp.png" 
+            alt="Google" 
+            className="google-icon" 
+          />
+          {t('register.signInWithGoogle')}
+        </button>
+
+        <div className="divider">
+          <span>{t('register.or')}</span>
         </div>
         
         {error && (
@@ -95,7 +118,6 @@ const Register = () => {
               onChange={handleChange}
               placeholder={t('register.emailPlaceholder')}
               required
-              className="form-input"
             />
           </div>
 
@@ -109,7 +131,6 @@ const Register = () => {
               onChange={handleChange}
               placeholder={t('register.passwordPlaceholder')}
               required
-              className="form-input"
             />
           </div>
 
@@ -123,7 +144,6 @@ const Register = () => {
               onChange={handleChange}
               placeholder={t('register.confirmPasswordPlaceholder')}
               required
-              className="form-input"
             />
           </div>
 
