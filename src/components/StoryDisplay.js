@@ -69,6 +69,46 @@ function StoryDisplay({ story }) {
         {story.title || t('storyDisplay.title')}
       </h3>
 
+      {audioUrl && <AudioPlayer audioUrl={audioUrl} />}
+
+      <div className="action-section audio-section">
+        <div className="action-title">{t('storyDisplay.audioOptions')}</div>
+        <div className="audio-actions">
+          <div className="voice-selector">
+            <label htmlFor="voiceType">{t('storyDisplay.voiceType')}</label>
+            <select
+              id="voiceType"
+              value={voiceType}
+              onChange={(e) => setVoiceType(e.target.value)}
+              disabled={isGeneratingAudio}
+            >
+              <option value="female">{t('storyDisplay.voiceFemale')}</option>
+              <option value="male">{t('storyDisplay.voiceMale')}</option>
+              <option value="female-latam">{t('storyDisplay.voiceFemaleLatam')}</option>
+              <option value="male-latam">{t('storyDisplay.voiceMaleLatam')}</option>
+              <option value="female-english">{t('storyDisplay.voiceFemaleEnglish')}</option>
+              <option value="male-english">{t('storyDisplay.voiceMaleEnglish')}</option>
+            </select>
+          </div>
+
+          <button
+            onClick={handleGenerateAudio}
+            disabled={isGeneratingAudio}
+            className="generate-audio-btn"
+          >
+            {isGeneratingAudio ? (
+              <>
+                <span className="spinner"></span> {t('storyDisplay.generatingAudio')}
+              </>
+            ) : (
+              <>
+                <span className="btn-icon">🔊</span> {t('storyDisplay.generateAudio')}
+              </>
+            )}
+          </button>
+        </div>
+      </div>
+
       <div className="story-content">
         {story.content.split('\n').map((paragraph, index) => (
           <p key={index}>{paragraph}</p>
@@ -87,47 +127,7 @@ function StoryDisplay({ story }) {
             </button>
           </div>
         </div>
-
-        <div className="action-section">
-          <div className="action-title">{t('storyDisplay.audioOptions')}</div>
-          <div className="audio-actions">
-            <div className="voice-selector">
-              <label htmlFor="voiceType">{t('storyDisplay.voiceType')}</label>
-              <select
-                id="voiceType"
-                value={voiceType}
-                onChange={(e) => setVoiceType(e.target.value)}
-                disabled={isGeneratingAudio}
-              >
-                <option value="female">{t('storyDisplay.voiceFemale')}</option>
-                <option value="male">{t('storyDisplay.voiceMale')}</option>
-                <option value="female-latam">{t('storyDisplay.voiceFemaleLatam')}</option>
-                <option value="male-latam">{t('storyDisplay.voiceMaleLatam')}</option>
-                <option value="female-english">{t('storyDisplay.voiceFemaleEnglish')}</option>
-                <option value="male-english">{t('storyDisplay.voiceMaleEnglish')}</option>
-              </select>
-            </div>
-
-            <button
-              onClick={handleGenerateAudio}
-              disabled={isGeneratingAudio}
-              className="generate-audio-btn"
-            >
-              {isGeneratingAudio ? (
-                <>
-                  <span className="spinner"></span> {t('storyDisplay.generatingAudio')}
-                </>
-              ) : (
-                <>
-                  <span className="btn-icon">🔊</span> {t('storyDisplay.generateAudio')}
-                </>
-              )}
-            </button>
-          </div>
-        </div>
       </div>
-
-      {audioUrl && <AudioPlayer audioUrl={audioUrl} />}
     </div>
   );
 }

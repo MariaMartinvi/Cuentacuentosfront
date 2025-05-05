@@ -1,0 +1,154 @@
+.audio-section {
+  background: #f8f9fa;
+  border-radius: 0.8rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.audio-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.voice-selector {
+  width: 100%;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.voice-selector label {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.voice-selector select {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}
+
+.generate-audio-btn {
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.3s ease;
+}
+
+.generate-audio-btn:hover {
+  background: #2980b9;
+}
+
+.generate-audio-btn:disabled {
+  background: #bdc3c7;
+  cursor: not-allowed;
+}
+
+.audio-player {
+  background: #f8f9fa;
+  border-radius: 0.8rem;
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+.player-header {
+  margin-bottom: 1rem;
+}
+
+.player-title {
+  font-size: 1.2rem;
+  color: #2c3e50;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.audio-icon {
+  font-size: 1.4rem;
+}
+
+.player-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.play-pause-btn {
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.3s ease;
+}
+
+.play-pause-btn:hover {
+  background: #2980b9;
+}
+
+.progress-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 4px;
+  -webkit-appearance: none;
+  background: #ddd;
+  border-radius: 2px;
+  outline: none;
+}
+
+.progress-bar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  background: #3498db;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.time-display {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+  min-width: 45px;
+}
+
+.download-audio-btn {
+  background: #2ecc71;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.3s ease;
+}
+
+.download-audio-btn:hover {
+  background: #27ae60;
+} 
