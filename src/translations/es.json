@@ -44,7 +44,8 @@
     "noAccount": "¿No tienes una cuenta?",
     "register": "Regístrate",
     "connecting": "Conectando al servidor...",
-    "redirectingToGoogle": "Redirigiendo a inicio de sesión de Google..."
+    "redirectingToGoogle": "Redirigiendo a inicio de sesión de Google...",
+    "rateLimitError": "Demasiados intentos de inicio de sesión. Por favor, espera un momento e inténtalo de nuevo."
   },
   "subscription": {
     "title": "Plan Premium",

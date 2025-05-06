@@ -41,9 +41,44 @@ axiosInstance.interceptors.response.use(
       console.error('Network error - Unable to connect to the server');
       throw new Error('Unable to connect to the server. Please check if the backend server is running.');
     }
+    
+    // Handle rate limiting errors
+    if (error.response && error.response.status === 429) {
+      console.error('Rate limiting error - Too many requests');
+      throw new Error('Too many requests. Please wait a moment and try again.');
+    }
+    
     return Promise.reject(error);
   }
 );
+
+// Retrying mechanism for rate limited requests
+const retryRequest = async (fn, maxRetries = 3, delay = 1000) => {
+  let lastError;
+  
+  for (let attempt = 0; attempt < maxRetries; attempt++) {
+    try {
+      return await fn();
+    } catch (error) {
+      lastError = error;
+      
+      // Only retry on rate limit errors
+      if (error.response && error.response.status === 429) {
+        console.log(`Request rate limited. Retrying in ${delay}ms... (Attempt ${attempt + 1}/${maxRetries})`);
+        // Wait for the specified delay before retrying
+        await new Promise(resolve => setTimeout(resolve, delay));
+        // Increase delay for next attempt (exponential backoff)
+        delay *= 2;
+      } else {
+        // If it's not a rate limit error, don't retry
+        throw error;
+      }
+    }
+  }
+  
+  // If we've exhausted all retries
+  throw lastError;
+};
 
 export const register = async (email, password) => {
   try {
@@ -79,9 +114,13 @@ export const register = async (email, password) => {
 export const login = async (email, password) => {
   try {
     console.log('Making login request to:', `${API_URL}/api/auth/login`);
-    const response = await axiosInstance.post('/api/auth/login', {
-      email,
-      password
+    
+    // Use the retrying mechanism for login requests
+    const response = await retryRequest(async () => {
+      return await axiosInstance.post('/api/auth/login', {
+        email,
+        password
+      });
     });
     
     console.log('Login response:', response.data);
@@ -114,6 +153,8 @@ export const login = async (email, password) => {
     console.error('Login error:', error);
     if (error.response?.status === 401) {
       throw new Error(i18next.t('login.error'));
+    } else if (error.response?.status === 429) {
+      throw new Error(i18next.t('login.rateLimitError') || 'Too many login attempts. Please try again later.');
     }
     throw error;
   }

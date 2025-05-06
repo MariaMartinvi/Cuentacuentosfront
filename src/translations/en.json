@@ -44,7 +44,8 @@
     "noAccount": "Don't have an account?",
     "register": "Register",
     "connecting": "Connecting to server...",
-    "redirectingToGoogle": "Redirecting to Google Sign-In..."
+    "redirectingToGoogle": "Redirecting to Google Sign-In...",
+    "rateLimitError": "Too many login attempts. Please wait a moment and try again."
   },
   "subscription": {
     "title": "Premium Plan",
