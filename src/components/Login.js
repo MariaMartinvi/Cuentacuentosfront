@@ -65,10 +65,18 @@ const Login = () => {
 
   const handleGoogleLogin = async () => {
     try {
+      setLoading(true);
+      setError('');
+      
       const frontendUrl = window.location.origin;
-      window.location.href = `${API_URL}/api/auth/google?redirect_uri=${encodeURIComponent(frontendUrl)}`;
+      
+      setTimeout(() => {
+        window.location.href = `${API_URL}/api/auth/google?redirect_uri=${encodeURIComponent(frontendUrl)}`;
+      }, 300);
+      
     } catch (error) {
       console.error('Google login error:', error);
+      setLoading(false);
       setError(t('login.error'));
     }
   };
@@ -90,8 +98,17 @@ const Login = () => {
           className="google-button"
           disabled={loading}
         >
-          <img src="/google-icon.svg" alt="Google" />
-          {t('login.signInWithGoogle')}
+          {loading ? (
+            <>
+              <div className="spinner small-spinner"></div>
+              {t('login.loading')}
+            </>
+          ) : (
+            <>
+              <img src="/google-icon.svg" alt="Google" />
+              {t('login.signInWithGoogle')}
+            </>
+          )}
         </button>
 
         <div className="divider">

@@ -59,12 +59,20 @@ const Register = () => {
 
   const handleGoogleSignIn = async () => {
     try {
+      setLoading(true);
+      setError('');
+      
       const apiUrl = process.env.NODE_ENV === 'production'
         ? 'https://generadorcuentos.onrender.com'
         : process.env.REACT_APP_API_URL || 'http://localhost:5001';
       const frontendUrl = window.location.origin;
-      window.location.href = `${apiUrl}/api/auth/google?redirect_uri=${encodeURIComponent(frontendUrl)}`;
+      
+      setTimeout(() => {
+        window.location.href = `${apiUrl}/api/auth/google?redirect_uri=${encodeURIComponent(frontendUrl)}`;
+      }, 300);
     } catch (err) {
+      console.error('Google sign in error:', err);
+      setLoading(false);
       setError(t('register.error'));
     }
   };
@@ -86,13 +94,23 @@ const Register = () => {
         <button 
           className="google-signin-button"
           onClick={handleGoogleSignIn}
+          disabled={loading}
         >
-          <img 
-            src="https://www.google.com/images/branding/googleg/1x/googleg_standard_color_128dp.png" 
-            alt="Google" 
-            className="google-icon" 
-          />
-          {t('register.signInWithGoogle')}
+          {loading ? (
+            <>
+              <div className="spinner small-spinner"></div>
+              {t('register.loading')}
+            </>
+          ) : (
+            <>
+              <img 
+                src="https://www.google.com/images/branding/googleg/1x/googleg_standard_color_128dp.png" 
+                alt="Google" 
+                className="google-icon" 
+              />
+              {t('register.signInWithGoogle')}
+            </>
+          )}
         </button>
 
         <div className="divider">

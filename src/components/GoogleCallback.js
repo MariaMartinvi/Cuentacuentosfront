@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import './GoogleCallback.css'; // We'll create this CSS file next
 
 const GoogleCallback = () => {
   const navigate = useNavigate();
@@ -37,9 +38,11 @@ const GoogleCallback = () => {
   }, [location, navigate, login]);
 
   return (
-    <div className="loading-container">
-      <div className="loading-spinner"></div>
-      <p>Iniciando sesión...</p>
+    <div className="auth-overlay">
+      <div className="auth-modal">
+        <div className="loading-spinner"></div>
+        <p>Iniciando sesión con Google...</p>
+      </div>
     </div>
   );
 };
