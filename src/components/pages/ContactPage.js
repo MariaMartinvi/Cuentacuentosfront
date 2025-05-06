@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import axios from 'axios';
+import { sendContactMessage } from '../../services/contactService';
 import './ContactPage.css';
 
 const ContactPage = () => {
@@ -26,10 +26,11 @@ const ContactPage = () => {
     setStatus({ type: '', message: '' });
 
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/contact`, formData);
+      await sendContactMessage(formData);
       setStatus({ type: 'success', message: t('contact.form.success') });
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
+      console.error('Error al enviar el formulario de contacto:', error);
       setStatus({ type: 'error', message: t('contact.form.error') });
     } finally {
       setLoading(false);

@@ -23,6 +23,9 @@ export const API_ENDPOINTS = {
   },
   AUDIO: {
     GENERATE: '/api/audio/generate'
+  },
+  CONTACT: {
+    SEND: '/api/contact'
   }
 };
 
