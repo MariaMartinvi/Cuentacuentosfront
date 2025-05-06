@@ -65,7 +65,8 @@ const Login = () => {
 
   const handleGoogleLogin = async () => {
     try {
-      window.location.href = `${API_URL}/api/auth/google`;
+      const frontendUrl = window.location.origin;
+      window.location.href = `${API_URL}/api/auth/google?redirect_uri=${encodeURIComponent(frontendUrl)}`;
     } catch (error) {
       console.error('Google login error:', error);
       setError(t('login.error'));
