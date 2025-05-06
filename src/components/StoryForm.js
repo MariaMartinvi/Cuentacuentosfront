@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { generateStory } from '../services/storyService.js';
 import { getCurrentUser } from '../services/authService';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './StoryForm.css';
 
 function StoryForm({ onStoryGenerated }) {
@@ -36,6 +36,17 @@ function StoryForm({ onStoryGenerated }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
+    // Verifica si el campo topic está vacío
+    const topicInput = document.getElementById('topic');
+    if (topicInput && !topicInput.value.trim()) {
+      // Hacer scroll hacia arriba de la página
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      // Enfoca el campo topic y muestra el mensaje de validación del navegador
+      topicInput.focus();
+      topicInput.reportValidity();
+      return;
+    }
+    
     if (!user) {
       setError(t('storyForm.loginRequired'));
       return;
@@ -67,6 +78,12 @@ function StoryForm({ onStoryGenerated }) {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  // Función para manejar el clic en el enlace de inicio de sesión
+  const handleLoginClick = (e) => {
+    // Scroll hacia arriba antes de navegar
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -192,7 +209,16 @@ function StoryForm({ onStoryGenerated }) {
 
         {error && (
           <div className="error-message">
-            <p>{error}</p>
+            {error === t('storyForm.loginRequired') ? (
+              <p>
+                {error}{' '}
+                <Link to="/login" className="error-login-link" onClick={handleLoginClick}>
+                  {t('storyForm.clickToLogin')}
+                </Link>
+              </p>
+            ) : (
+              <p>{error}</p>
+            )}
           </div>
         )}
 

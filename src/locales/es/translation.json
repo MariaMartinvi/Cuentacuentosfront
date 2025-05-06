@@ -233,7 +233,9 @@
     "generating": "Generando...",
     "resetButton": "Reiniciar",
     "storyLimitReached": "Has alcanzado tu límite de historias gratuitas. Por favor, suscríbete para generar más historias.",
-    "generalError": "Ha ocurrido un error al generar el cuento. Por favor, inténtalo de nuevo."
+    "generalError": "Ha ocurrido un error al generar el cuento. Por favor, inténtalo de nuevo.",
+    "loginRequired": "Por favor, inicia sesión para generar cuentos",
+    "clickToLogin": "Haz clic aquí para iniciar sesión"
   },
   "homepage": {
     "heroTitle": "Audiocuentos para aprender español mientras se duermen.",
@@ -337,5 +339,8 @@
     "copyright": "Generador de Cuentos IA. Todos los derechos reservados.",
     "madeWith": "Hecho con",
     "inBarcelona": "en Barcelona"
+  },
+  "common": {
+    "learnMore": "Pruébalo"
   }
 } 

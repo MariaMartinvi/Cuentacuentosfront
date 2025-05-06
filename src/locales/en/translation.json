@@ -67,6 +67,9 @@
     "cancelInfo": "You can cancel your subscription at any time. Premium access will continue until the end of the paid period.",
     "paymentInfo": "Secure payment processed by Stripe. We do not store your card information."
   },
+  "common": {
+    "learnMore": "Try it"
+  },
   "storyForm": {
     "title": "Story Generator",
     "topicLabel": "Story Topic",
@@ -108,7 +111,8 @@
     "emailLabel": "Email",
     "emailPlaceholder": "Enter your email",
     "alertEmailRequired": "Please enter your email",
-    "loginRequired": "Please log in to generate stories"
+    "loginRequired": "Please log in to generate stories",
+    "clickToLogin": "Click here to log in"
   },
   "auth": {
     "login": "Login",

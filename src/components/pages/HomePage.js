@@ -3,6 +3,7 @@ import StoryForm from '../StoryForm.js';
 import { useTranslation } from 'react-i18next';
 import StoryDisplay from '../StoryDisplay.js';
 import '../../styles/global.css';
+import '../FeaturesSection.css';
 
 function HomePage() {
   const [generatedStory, setGeneratedStory] = useState(null);
@@ -19,6 +20,14 @@ function HomePage() {
           storyDisplay.scrollIntoView({ behavior: 'smooth' });
         }
       }, 100);
+    }
+  };
+
+  const scrollToStoryForm = (e) => {
+    e.preventDefault();
+    const storyForm = document.querySelector('.story-form-container');
+    if (storyForm) {
+      storyForm.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -46,18 +55,21 @@ function HomePage() {
                 <div className="feature-icon">✨</div>
                 <h3>{t('homepage.uniqueStoriesTitle')}</h3>
                 <p>{t('homepage.uniqueStoriesDescription')}</p>
+                <a href="#" onClick={scrollToStoryForm}>{t('common.learnMore')}</a>
               </div>
 
               <div className="feature-card">
                 <div className="feature-icon">🎭</div>
                 <h3>{t('homepage.multipleGenresTitle')}</h3>
                 <p>{t('homepage.multipleGenresDescription')}</p>
+                <a href="#" onClick={scrollToStoryForm}>{t('common.learnMore')}</a>
               </div>
 
               <div className="feature-card">
                 <div className="feature-icon">🔊</div>
                 <h3>{t('homepage.audioConversionTitle')}</h3>
                 <p>{t('homepage.audioConversionDescription')}</p>
+                <a href="#" onClick={scrollToStoryForm}>{t('common.learnMore')}</a>
               </div>
             </div>
           </div>
