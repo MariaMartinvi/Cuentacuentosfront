@@ -259,22 +259,6 @@ function StoryForm({ onStoryGenerated }) {
               </>
             )}
           </button>
-          <button
-            type="button"
-            className="reset-btn"
-            onClick={() => {
-              setTopic('');
-              setStoryLength('medium');
-              setStoryType('original');
-              setCreativityLevel('innovative');
-              setAgeGroup('default');
-              setChildNames('');
-              setEnglishLevel('intermediate');
-              setError(null);
-            }}
-          >
-            {t('storyForm.resetButton')}
-          </button>
         </div>
       </form>
     </div>
