@@ -1,8 +1,8 @@
 // audioService.js
 import { getAuthHeader, refreshToken } from './authService';
 
-// Configuración de timeout para la generación de audio (1 minuto)
-const AUDIO_GENERATION_TIMEOUT = 60 * 1000;
+// Configuración de timeout para la generación de audio (3 minutos)
+const AUDIO_GENERATION_TIMEOUT = 180 * 1000;
 
 // Función para crear un timeout
 const createTimeout = (ms) => {
