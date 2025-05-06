@@ -32,12 +32,19 @@
     "title": "Bienvenido de nuevo",
     "subtitle": "Inicia sesión en tu cuenta",
     "emailLabel": "Correo electrónico",
-    "emailPlaceholder": "Ingresa tu correo electrónico",
+    "emailPlaceholder": "Introduce tu correo electrónico",
     "passwordLabel": "Contraseña",
-    "passwordPlaceholder": "Ingresa tu contraseña",
+    "passwordPlaceholder": "Introduce tu contraseña",
     "loginButton": "Iniciar sesión",
     "registerLink": "¿No tienes una cuenta? Regístrate",
-    "error": "Correo electrónico o contraseña inválidos"
+    "error": "Correo electrónico o contraseña incorrectos",
+    "loading": "Procesando...",
+    "signInWithGoogle": "Iniciar sesión con Google",
+    "or": "o",
+    "noAccount": "¿No tienes una cuenta?",
+    "register": "Regístrate",
+    "connecting": "Conectando al servidor...",
+    "redirectingToGoogle": "Redirigiendo a inicio de sesión de Google..."
   },
   "subscription": {
     "title": "Plan Premium",

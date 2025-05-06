@@ -37,7 +37,14 @@
     "passwordPlaceholder": "Enter your password",
     "loginButton": "Login",
     "registerLink": "Don't have an account? Register",
-    "error": "Invalid email or password"
+    "error": "Invalid email or password",
+    "loading": "Processing...",
+    "signInWithGoogle": "Sign in with Google",
+    "or": "or",
+    "noAccount": "Don't have an account?",
+    "register": "Register",
+    "connecting": "Connecting to server...",
+    "redirectingToGoogle": "Redirecting to Google Sign-In..."
   },
   "subscription": {
     "title": "Premium Plan",
