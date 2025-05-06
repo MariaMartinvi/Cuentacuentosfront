@@ -41,8 +41,9 @@ function StoryForm({ onStoryGenerated }) {
     if (topicInput && !topicInput.value.trim()) {
       // Hacer scroll hacia arriba de la página
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      // Enfoca el campo topic y muestra el mensaje de validación del navegador
+      // Enfoca el campo topic y muestra el mensaje de validación personalizado
       topicInput.focus();
+      topicInput.setCustomValidity(t('storyForm.alertTopicRequired'));
       topicInput.reportValidity();
       return;
     }
@@ -86,6 +87,13 @@ function StoryForm({ onStoryGenerated }) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  // Función para limpiar el mensaje de validación cuando el usuario empieza a escribir
+  const handleTopicChange = (e) => {
+    const input = e.target;
+    input.setCustomValidity('');
+    setTopic(e.target.value);
+  };
+
   return (
     <div className="story-form-container">
       <h2>
@@ -102,7 +110,7 @@ function StoryForm({ onStoryGenerated }) {
             type="text"
             id="topic"
             value={topic}
-            onChange={(e) => setTopic(e.target.value)}
+            onChange={handleTopicChange}
             placeholder={t('storyForm.topicPlaceholder')}
             required
           />

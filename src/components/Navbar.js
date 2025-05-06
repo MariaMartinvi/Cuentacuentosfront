@@ -13,35 +13,42 @@ function Navbar() {
     i18n.changeLanguage(language);
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar-container">
         <div className="logo">
-          <Link to="/">🦉 Mi Cuenta Cuentos</Link>
+          <Link to="/" onClick={scrollToTop}>🦉 Mi Cuenta Cuentos</Link>
         </div>
         <div className="nav-links">
-          <Link to="/">{t('navbar.home')}</Link>
-          <Link to="/contact">{t('navbar.contact')}</Link>
+          <Link to="/" onClick={scrollToTop}>{t('navbar.home')}</Link>
+          <Link to="/contact" onClick={scrollToTop}>{t('navbar.contact')}</Link>
         </div>
         <div className="nav-links">
           {user ? (
             <>
-              <Link to="/profile" className="user-name">
+              <Link to="/profile" className="user-name" onClick={scrollToTop}>
                 {user.name || user.email}
                 {user.isPremium && (
                   <span className="premium-badge">⭐ Premium</span>
                 )}
               </Link>
               {!user.isPremium && (
-                <Link to="/subscribe" className="subscribe-link">
+                <Link to="/subscribe" className="subscribe-link" onClick={scrollToTop}>
                   {t('subscription.subscribeButton')}
                 </Link>
               )}
             </>
           ) : (
             <>
-              <Link to="/login" className="login-nav-button">{t('navbar.login')}</Link>
-              <Link to="/register" className="register-nav-link">{t('navbar.register')}</Link>
+              <Link to="/login" className="login-nav-button" onClick={scrollToTop}>{t('navbar.login')}</Link>
+              <Link to="/register" className="register-nav-link" onClick={scrollToTop}>{t('navbar.register')}</Link>
             </>
           )}
           <button
