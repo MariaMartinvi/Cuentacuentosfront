@@ -28,10 +28,27 @@ const AboutPage = () => {
           </div>
         </div>
 
-        <div className="about-content">
-          <div className="about-text">
-            <h2>{t('about.team.title')}</h2>
-            <p>{t('about.team.text')}</p>
+        <div className="team-section">
+          <h2 className="section-title">{t('about.team.title')}</h2>
+          <p className="team-description">
+            {t('about.team.description')}{' '}
+            <a href="https://comartinvi.com/" target="_blank" rel="noopener noreferrer" className="team-link">
+              comartinvi.com
+            </a>
+          </p>
+          <div className="team-grid">
+            <div className="team-member">
+              <h3>{t('about.team.members.developer.name')}</h3>
+              <p>{t('about.team.members.developer.role')}</p>
+            </div>
+            <div className="team-member">
+              <h3>{t('about.team.members.writer.name')}</h3>
+              <p>{t('about.team.members.writer.role')}</p>
+            </div>
+            <div className="team-member">
+              <h3>{t('about.team.members.creative.name')}</h3>
+              <p>{t('about.team.members.creative.role')}</p>
+            </div>
           </div>
         </div>
 

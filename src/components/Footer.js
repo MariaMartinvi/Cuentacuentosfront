@@ -7,6 +7,13 @@ function Footer() {
   const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   return (
     <footer className="footer">
       <div className="footer-container">
@@ -26,10 +33,10 @@ function Footer() {
           <div className="footer-section">
             <h3>{t('footer.quickLinks')}</h3>
             <ul className="footer-links">
-              <li><Link to="/como-funciona">{t('footer.howItWorks')}</Link></li>
-              <li><Link to="/about">{t('footer.aboutUs')}</Link></li>
-              <li><Link to="/terminos">{t('footer.terms')}</Link></li>
-              <li><Link to="/politica">{t('footer.privacy')}</Link></li>
+              <li><Link to="/como-funciona" onClick={scrollToTop}>{t('footer.howItWorks')}</Link></li>
+              <li><Link to="/about" onClick={scrollToTop}>{t('footer.aboutUs')}</Link></li>
+              <li><Link to="/terminos" onClick={scrollToTop}>{t('footer.terms')}</Link></li>
+              <li><Link to="/politica" onClick={scrollToTop}>{t('footer.privacy')}</Link></li>
             </ul>
           </div>
         </div>

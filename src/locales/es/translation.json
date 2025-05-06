@@ -76,21 +76,33 @@
   },
   "comoFunciona": {
     "title": "Cómo Funciona",
+    "description": "Descubre cómo crear historias mágicas que ayudan a tus hijos a aprender idiomas mientras se duermen",
     "step1": {
-      "title": "Paso 1: Elige un Tema",
-      "description": "Introduce un tema o idea para tu historia. Puede ser cualquier cosa: aventuras, fantasía, ciencia ficción, ¡lo que quieras!"
+      "title": "Paso 1: Elige y Personaliza",
+      "description": "Selecciona el tema de la historia y personaliza los detalles: género, longitud y nivel de idioma. Añade los nombres de los protagonistas para hacer la historia más personal y atractiva para los niños.",
+      "features": {
+        "creative": "Temas creativos y originales",
+        "flexible": "Total libertad de elección",
+        "language": "Niveles de idioma adaptados a cada edad"
+      }
     },
     "step2": {
-      "title": "Paso 2: Personaliza",
-      "description": "Selecciona el género, la longitud y el nivel de creatividad para que la historia se adapte a tus necesidades."
+      "title": "Paso 2: Genera tu Historia",
+      "description": "Con un solo clic, nuestra inteligencia artificial creará una historia única en el idioma seleccionado. Perfecta para que los niños se familiaricen con nuevos idiomas de forma natural mientras disfrutan de una historia cautivadora.",
+      "features": {
+        "instant": "Generación instantánea",
+        "unique": "Historias únicas cada vez",
+        "quality": "Alta calidad narrativa y lingüística"
+      }
     },
     "step3": {
-      "title": "Paso 3: Genera y Disfruta",
-      "description": "Haz clic en 'Generar Historia' y deja que nuestra inteligencia artificial haga la magia."
-    },
-    "step4": {
-      "title": "Paso 4: Escucha en Audio",
-      "description": "Puedes generar hasta 2 versiones de audio diferentes para cada historia. ¡Disfruta de tu cuento en formato audio!"
+      "title": "Paso 3: Escucha y Aprende",
+      "description": "Convierte tu historia en un audiocuento con voces nativas y diferentes acentos. Los niños aprenderán la pronunciación correcta mientras disfrutan de sus cuentos favoritos en otro idioma. ¡Ideal para aprender mientras se duermen!",
+      "features": {
+        "voices": "Voces nativas auténticas",
+        "accents": "Múltiples acentos",
+        "download": "Descarga para escuchar offline"
+      }
     }
   },
   "terminos": {
@@ -125,6 +137,7 @@
   },
   "about": {
     "title": "Sobre Nosotros",
+    "subtitle": "AGENCIA COMARTINVI",
     "mission": {
       "title": "Nuestra Misión",
       "text": "En MiCuentaCuentos, nos dedicamos a hacer que la creación de historias sea accesible y divertida para todos. Utilizamos la última tecnología de inteligencia artificial para ayudarte a dar vida a tus ideas."
@@ -135,7 +148,21 @@
     },
     "team": {
       "title": "Nuestro Equipo",
-      "text": "Somos un equipo apasionado de desarrolladores, escritores y creativos trabajando juntos para crear la mejor experiencia de generación de cuentos."
+      "description": "Somos un equipo apasionado de desarrolladores, escritores y creativos trabajando juntos para crear la mejor experiencia de generación de cuentos. Visita",
+      "members": {
+        "developer": {
+          "name": "Desarrolladores",
+          "role": "Expertos en tecnología y programación"
+        },
+        "writer": {
+          "name": "Escritores",
+          "role": "Profesionales de la literatura infantil"
+        },
+        "creative": {
+          "name": "Creativos",
+          "role": "Especialistas en diseño y experiencia de usuario"
+        }
+      }
     },
     "values": {
       "title": "Nuestros Valores",

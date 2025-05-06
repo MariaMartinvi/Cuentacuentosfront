@@ -125,21 +125,33 @@
   },
   "comoFunciona": {
     "title": "How It Works",
+    "description": "Discover how to create magical stories that help your children learn languages while falling asleep",
     "step1": {
-      "title": "Step 1: Choose a Topic",
-      "description": "Enter a topic or idea for your story. It can be anything: adventures, fantasy, science fiction, whatever you want!"
+      "title": "Step 1: Choose and Customize",
+      "description": "Select the story topic and customize the details: genre, length, and language level. Add the main characters' names to make the story more personal and engaging for children.",
+      "features": {
+        "creative": "Creative and original topics",
+        "flexible": "Complete freedom of choice",
+        "language": "Language levels adapted to each age"
+      }
     },
     "step2": {
-      "title": "Step 2: Customize",
-      "description": "Select the genre, length, and creativity level to make the story fit your needs."
+      "title": "Step 2: Generate Your Story",
+      "description": "With just one click, our artificial intelligence will create a unique story in the selected language. Perfect for children to naturally familiarize themselves with new languages while enjoying a captivating tale.",
+      "features": {
+        "instant": "Instant generation",
+        "unique": "Unique stories every time",
+        "quality": "High narrative and linguistic quality"
+      }
     },
     "step3": {
-      "title": "Step 3: Generate and Enjoy",
-      "description": "Click 'Generate Story' and let our artificial intelligence work its magic."
-    },
-    "step4": {
-      "title": "Step 4: Listen in Audio",
-      "description": "You can generate up to 2 different audio versions for each story. Enjoy your story in audio format!"
+      "title": "Step 3: Listen and Learn",
+      "description": "Convert your story into an audiobook with native voices and different accents. Children will learn correct pronunciation while enjoying their favorite stories in another language. Perfect for learning while falling asleep!",
+      "features": {
+        "voices": "Authentic native voices",
+        "accents": "Multiple accents",
+        "download": "Download for offline listening"
+      }
     }
   },
   "terminos": {
@@ -174,6 +186,7 @@
   },
   "about": {
     "title": "About Us",
+    "subtitle": "AGENCIA COMARTINVI",
     "mission": {
       "title": "Our Mission",
       "text": "At MiCuentaCuentos, we are dedicated to making story creation accessible and fun for everyone. We use the latest artificial intelligence technology to help you bring your ideas to life."
@@ -184,7 +197,21 @@
     },
     "team": {
       "title": "Our Team",
-      "text": "We are a passionate team of developers, writers, and creatives working together to create the best story generation experience."
+      "description": "We are a passionate team of developers, writers, and creatives working together to create the best story generation experience. Visit",
+      "members": {
+        "developer": {
+          "name": "Developers",
+          "role": "Technology and programming experts"
+        },
+        "writer": {
+          "name": "Writers",
+          "role": "Children's literature professionals"
+        },
+        "creative": {
+          "name": "Creatives",
+          "role": "Design and user experience specialists"
+        }
+      }
     },
     "values": {
       "title": "Our Values",
