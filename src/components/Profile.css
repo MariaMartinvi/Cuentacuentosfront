@@ -135,6 +135,106 @@
   text-align: center;
 }
 
+.logout-container {
+  text-align: center;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e9ecef;
+}
+
+.logout-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8rem 2rem;
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(220, 53, 69, 0.2);
+}
+
+.logout-button:hover {
+  background: #c82333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+}
+
+.logout-button:disabled {
+  background: #bdc3c7;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.logout-button::before {
+  content: "🚪";
+  font-size: 1.2rem;
+}
+
+.premium-info {
+  color: #555;
+  font-size: 1rem;
+  margin-top: 1.5rem;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  background: #f0f4ff;
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid #4361ee;
+  text-align: left;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  line-height: 1.5;
+}
+
+.premium-info a {
+  color: #4361ee;
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: 4px;
+  transition: all 0.3s ease;
+}
+
+.premium-info a:hover {
+  text-decoration: underline;
+  color: #3a56e3;
+}
+
+.premium-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8rem 2rem;
+  background: linear-gradient(45deg, #4361ee, #3a56e3);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(67, 97, 238, 0.25);
+  text-decoration: none;
+}
+
+.premium-button:hover {
+  background: linear-gradient(45deg, #3a56e3, #2a46d3);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(67, 97, 238, 0.3);
+}
+
+.premium-button::before {
+  content: "⭐";
+  font-size: 1.2rem;
+}
+
 @media (max-width: 768px) {
   .profile-container {
     padding: 1rem;

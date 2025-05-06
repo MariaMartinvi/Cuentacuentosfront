@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import { getCurrentUser } from '../services/authService';
+import { getCurrentUser, logout } from '../services/authService';
+import { useAuth } from '../contexts/AuthContext';
 import './Profile.css';
 
 const Profile = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { setUser: setAuthUser } = useAuth();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -23,6 +27,12 @@ const Profile = () => {
     };
     loadUser();
   }, [t]);
+
+  const handleLogout = () => {
+    logout();
+    setAuthUser(null);
+    navigate('/login');
+  };
 
   const handleCancelSubscription = async () => {
     setLoading(true);
@@ -71,7 +81,7 @@ const Profile = () => {
           <div className="info-group">
             <label>{t('profile.subscriptionStatus')}</label>
             <p className={`status ${user.subscriptionStatus}`}>
-              {t(`profile.status.${user.subscriptionStatus}`)}
+              {t(`profile.subscription${user.subscriptionStatus.charAt(0).toUpperCase() + user.subscriptionStatus.slice(1)}`)}
               {user.isPremium && ' (Premium)'}
             </p>
           </div>
@@ -90,6 +100,18 @@ const Profile = () => {
           </div>
         )}
 
+        {!user.isPremium && (
+          <div className="subscription-actions">
+            <Link to="/subscribe" className="premium-button">
+              {t('subscription.subscribeButton')}
+            </Link>
+            <p className="premium-info">
+              {t('profile.premiumInfo')}
+              <Link to="/subscribe"> {t('profile.learnMore')}</Link>
+            </p>
+          </div>
+        )}
+
         {error && (
           <div className="error-message">
             {error}
@@ -101,6 +123,12 @@ const Profile = () => {
             {success}
           </div>
         )}
+
+        <div className="logout-container">
+          <button onClick={handleLogout} className="logout-button">
+            {t('navbar.logout')}
+          </button>
+        </div>
       </div>
     </div>
   );

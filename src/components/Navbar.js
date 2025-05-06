@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../contexts/AuthContext';
-import { logout } from '../services/authService';
+import './Navbar.css';
 
 function Navbar() {
   const { i18n, t } = useTranslation();
@@ -11,12 +11,6 @@ function Navbar() {
 
   const changeLanguage = (language) => {
     i18n.changeLanguage(language);
-  };
-
-  const handleLogout = () => {
-    logout();
-    setUser(null);
-    navigate('/login');
   };
 
   return (
@@ -43,14 +37,11 @@ function Navbar() {
                   {t('subscription.subscribeButton')}
                 </Link>
               )}
-              <button onClick={handleLogout} className="logout-button">
-                {t('navbar.logout')}
-              </button>
             </>
           ) : (
             <>
-              <Link to="/login">{t('navbar.login')}</Link>
-              <Link to="/register">{t('navbar.register')}</Link>
+              <Link to="/login" className="login-nav-button">{t('navbar.login')}</Link>
+              <Link to="/register" className="register-nav-link">{t('navbar.register')}</Link>
             </>
           )}
           <button

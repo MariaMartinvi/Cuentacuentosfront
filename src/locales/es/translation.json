@@ -17,9 +17,9 @@
       },
       "price": {
         "title": "Precio de Suscripción",
-        "amount": "9,99€/mes"
+        "amount": "5€/mes"
       },
-      "button": "Suscribirse Ahora",
+      "button": "Plan Premium",
       "error": {
         "noEmail": "Se requiere el correo electrónico del usuario",
         "noSession": "Respuesta de sesión inválida del servidor",
@@ -32,13 +32,14 @@
     "processing": "Procesando...",
     "loading": "Cargando...",
     "error": "Ocurrió un error. Por favor, inténtalo de nuevo.",
-    "title": "Suscripción Premium",
-    "description": "Obtén acceso ilimitado a todas las funciones y genera cuentos sin límites",
+    "title": "",
+    "subtitle": "",
+    "description": "",
     "featuresTitle": "Características Premium",
     "feature1": "Generación ilimitada de cuentos",
     "feature2": "Soporte prioritario",
     "feature3": "Acceso a todos los tipos de cuentos",
-    "subscribeButton": "Suscribirse Ahora",
+    "subscribeButton": "Plan Premium",
     "success": "¡Suscripción exitosa!",
     "cancel": "Cancelar Suscripción",
     "cancelSuccess": "Suscripción cancelada exitosamente",
@@ -48,7 +49,7 @@
     "prioritySupport": "Soporte prioritario",
     "earlyAccess": "Acceso anticipado a nuevas funciones",
     "price": "Precio",
-    "priceDescription": "9.99€/mes",
+    "priceDescription": "5€/mes",
     "successTitle": "¡Suscripción Exitosa!",
     "successMessage": "Gracias por suscribirte. Tu cuenta ha sido actualizada con acceso premium.",
     "redirectMessage": "Serás redirigido a la página principal en 5 segundos...",
@@ -203,7 +204,7 @@
     "topicPlaceholder": "Ej: Un dragón que aprende a compartir",
     "childNamesLabel": "Nombres de los niños (opcional)",
     "childNamesPlaceholder": "Ej: María y Juan",
-    "englishLevelLabel": "Nivel de inglés",
+    "englishLevelLabel": "Nivel de español",
     "englishLevelBeginner": "Principiante",
     "englishLevelIntermediate": "Intermedio",
     "englishLevelAdvanced": "Avanzado",
@@ -292,21 +293,24 @@
   },
  
   "profile": {
-    "title": "Perfil",
+    "title": "Mi Perfil",
     "name": "Nombre",
-    "email": "Correo Electrónico",
-    "subscriptionStatus": "Estado de Suscripción",
-    "status": {
-      "free": "Plan Gratuito",
-      "active": "Activa",
-      "cancelled": "Cancelada",
-      "inactive": "Inactiva"
-    },
-    "cancelSubscription": "Cancelar Suscripción",
-    "cancelInfo": "Tu suscripción seguirá activa hasta el final del período actual.",
-    "loading": "Cargando...",
-    "error": "Ha ocurrido un error. Por favor, inténtalo de nuevo.",
-    "subscriptionCancelled": "Suscripción cancelada exitosamente"
+    "email": "Correo electrónico",
+    "subscriptionStatus": "Estado de suscripción",
+    "subscriptionActive": "Suscrito - Plan Premium",
+    "subscriptionCancelled": "Suscripción cancelada",
+    "subscriptionNone": "Sin suscripción",
+    "subscriptionFree": "Gratuito",
+    "subscriptionTrialing": "Período de prueba",
+    "cancelSubscription": "Cancelar suscripción",
+    "cancelling": "Cancelando...",
+    "premiumInfo": "Por solo 5€ al mes, genera 30 audiocuentos en cualquier idioma",
+    "learnMore": "Infórmate aquí",
+    "noActiveSubscription": "No tienes una suscripción activa",
+    "cancelError": "Error al cancelar la suscripción",
+    "subscriptionCancelled": "Suscripción cancelada correctamente",
+    "subscribe": "Suscríbete ahora",
+    "loading": "Cargando..."
   },
   "navbar": {
     "appName": "MiCuentaCuentos",
@@ -321,6 +325,17 @@
     "logout": "Cerrar sesión",
     "english": "Learn English",
     "spanish": "Aprende Español"
+  },
+  "footer": {
+    "title": "Generador de Cuentos IA",
+    "description": "Crea historias cautivadoras en español con inteligencia artificial. Personaliza, genera y escucha tus cuentos con nuestra herramienta gratuita.",
+    "quickLinks": "Enlaces Rápidos",
+    "howItWorks": "Cómo Funciona",
+    "aboutUs": "Sobre Nosotros",
+    "terms": "Términos y Condiciones",
+    "privacy": "Política de Privacidad",
+    "copyright": "Generador de Cuentos IA. Todos los derechos reservados.",
+    "madeWith": "Hecho con",
+    "inBarcelona": "en Barcelona"
   }
-  
 } 

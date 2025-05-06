@@ -5,8 +5,8 @@
     "login": "Login",
     "register": "Register",
     "logout": "Logout",
-    "english": "English",
-    "spanish": "Spanish"
+    "english": "Learn English",
+    "spanish": "Aprende Español"
   },
   "register": {
     "title": "Create your account",
@@ -40,19 +40,19 @@
     "error": "Invalid email or password"
   },
   "subscription": {
-    "title": "Premium Subscription",
-    "subtitle": "Unlock all features",
+    "title": "Premium Plan",
+    "subtitle": "",
     "planTitle": "Monthly Plan",
-    "price": "5€/month",
-    "planDescription": "Generate up to 30 audio stories per month",
+    "price": "€5/month",
+    "planDescription": "For just €5 per month, generate 30 audio stories in any language",
     "features": {
-      "0": "Unlimited story generation",
-      "1": "High-quality audio conversion",
-      "2": "Multiple story genres",
-      "3": "Customizable characters",
-      "4": "Priority support"
+      "0": "30 audio stories per month",
+      "1": "Stories in English and Spanish",
+      "2": "Different voices and accents",
+      "3": "Priority support",
+      "4": "Access to all premium features"
     },
-    "subscribeButton": "Subscribe Now",
+    "subscribeButton": "Premium Plan",
     "cancelInfo": "Cancel anytime",
     "paymentInfo": "Secure payment",
     "error": "Error processing subscription",

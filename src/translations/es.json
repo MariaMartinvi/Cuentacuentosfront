@@ -5,8 +5,8 @@
     "login": "Iniciar sesión",
     "register": "Registrarse",
     "logout": "Cerrar sesión",
-    "english": "Inglés",
-    "spanish": "Español"
+    "english": "Learn English",
+    "spanish": "Aprende Español"
   },
   "register": {
     "title": "Crea tu cuenta",
@@ -40,19 +40,19 @@
     "error": "Correo electrónico o contraseña inválidos"
   },
   "subscription": {
-    "title": "Suscripción Premium",
-    "subtitle": "Desbloquea todas las funciones",
+    "title": "Plan Premium",
+    "subtitle": "",
     "planTitle": "Plan Mensual",
     "price": "5€/mes",
-    "planDescription": "Genera hasta 30 cuentos de audio al mes",
+    "planDescription": "Por solo 5€ al mes, genera 30 audiocuentos en cualquier idioma",
     "features": {
-      "0": "Generación ilimitada de cuentos",
-      "1": "Conversión de audio de alta calidad",
-      "2": "Múltiples géneros de cuentos",
-      "3": "Personajes personalizables",
-      "4": "Soporte prioritario"
+      "0": "30 audiocuentos mensuales",
+      "1": "Cuentos en español e inglés",
+      "2": "Diferentes voces y acentos",
+      "3": "Soporte prioritario",
+      "4": "Acceso a todas las funciones premium"
     },
-    "subscribeButton": "Suscribirse Ahora",
+    "subscribeButton": "Plan Premium",
     "cancelInfo": "Cancela en cualquier momento",
     "paymentInfo": "Pago seguro",
     "error": "Error al procesar la suscripción",

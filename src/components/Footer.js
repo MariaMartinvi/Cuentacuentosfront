@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { useTranslation } from 'react-i18next';
 import '../styles/footer.css';
 
 function Footer() {
+  const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -10,8 +12,8 @@ function Footer() {
       <div className="footer-container">
         <div className="footer-content">
           <div className="footer-section">
-            <h3>Generador de Cuentos IA</h3>
-            <p>Crea historias cautivadoras en español con inteligencia artificial. Personaliza, genera y escucha tus cuentos con nuestra herramienta gratuita.</p>
+            <h3>{t('footer.title')}</h3>
+            <p>{t('footer.description')}</p>
             <div className="footer-logo">
               <svg width="32" height="32" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="80" height="80" rx="16" fill="#4361ee"/>
@@ -22,20 +24,20 @@ function Footer() {
           </div>
 
           <div className="footer-section">
-            <h3>Enlaces Rápidos</h3>
+            <h3>{t('footer.quickLinks')}</h3>
             <ul className="footer-links">
-              <li><Link to="/como-funciona">Cómo Funciona</Link></li>
-              <li><Link to="/about">Sobre Nosotros</Link></li>
-              <li><Link to="/terminos">Términos y Condiciones</Link></li>
-              <li><Link to="/politica">Política de Privacidad</Link></li>
+              <li><Link to="/como-funciona">{t('footer.howItWorks')}</Link></li>
+              <li><Link to="/about">{t('footer.aboutUs')}</Link></li>
+              <li><Link to="/terminos">{t('footer.terms')}</Link></li>
+              <li><Link to="/politica">{t('footer.privacy')}</Link></li>
             </ul>
           </div>
         </div>
 
         <div className="footer-bottom">
-          <p className="centered-text">© {currentYear} Generador de Cuentos IA. Todos los derechos reservados.</p>
+          <p className="centered-text">© {currentYear} {t('footer.copyright')}</p>
           <div className="made-with">
-            Hecho con <span className="heart">❤️</span> en Barcelona
+            {t('footer.madeWith')} <span className="heart">❤️</span> {t('footer.inBarcelona')}
           </div>
         </div>
       </div>

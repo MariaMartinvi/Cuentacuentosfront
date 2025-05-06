@@ -17,9 +17,9 @@
       },
       "price": {
         "title": "Subscription Price",
-        "amount": "€9.99/month"
+        "amount": "€5/month"
       },
-      "button": "Subscribe Now",
+      "button": "Premium Plan",
       "error": {
         "noEmail": "User email is required",
         "noSession": "Invalid session response from server",
@@ -31,13 +31,14 @@
     "resubscribe": "Reactivate Subscription",
     "processing": "Processing...",
     "error": "An error occurred. Please try again.",
-    "title": "Subscription",
-    "description": "Get unlimited access to all features and generate stories without limits",
+    "title": "",
+    "subtitle": "",
+    "description": "",
     "featuresTitle": "Premium Features",
     "feature1": "Unlimited story generation",
     "feature2": "Priority support",
     "feature3": "Access to all story types",
-    "subscribeButton": "Subscribe Now",
+    "subscribeButton": "Premium Plan",
     "success": "Subscription successful!",
     "cancel": "Cancel Subscription",
     "cancelSuccess": "Subscription cancelled successfully",
@@ -47,13 +48,24 @@
     "prioritySupport": "Priority support",
     "earlyAccess": "Early access to new features",
     "price": "Price",
-    "priceDescription": "€9.99/month",
+    "priceDescription": "€5/month",
     "successTitle": "Subscription Successful!",
     "successMessage": "Thank you for subscribing. Your account has been updated with premium access.",
     "redirectMessage": "You will be redirected to the home page in 5 seconds...",
     "paymentSuccess": "Payment Successful!",
     "thankYou": "Thank you for your subscription. You will be redirected to the home page shortly.",
-    "noSessionId": "No session ID found. Please contact support if you believe this is an error."
+    "noSessionId": "No session ID found. Please contact support if you believe this is an error.",
+    "planTitle": "Premium Plan",
+    "planDescription": "For just €5 per month, generate 30 audio stories in any language",
+    "features": {
+      "0": "30 audio stories per month",
+      "1": "Stories in English and Spanish",
+      "2": "Different voices and accents",
+      "3": "Priority support",
+      "4": "Access to all premium features"
+    },
+    "cancelInfo": "You can cancel your subscription at any time. Premium access will continue until the end of the paid period.",
+    "paymentInfo": "Secure payment processed by Stripe. We do not store your card information."
   },
   "storyForm": {
     "title": "Story Generator",
@@ -251,7 +263,10 @@
     "subscribe": "Subscribe",
     "login": "Login",
     "register": "Register",
-    "logout": "Logout"
+    "logout": "Logout",
+    "contact": "Contact",
+    "english": "Learn English",
+    "spanish": "Aprende Español"
   },
   "register": {
     "title": "Create Your Account",
@@ -296,10 +311,24 @@
     "subscriptionTrialing": "Trial period",
     "cancelSubscription": "Cancel subscription",
     "cancelling": "Cancelling...",
+    "premiumInfo": "For just €5 per month, generate 30 audio stories in any language",
+    "learnMore": "Learn more here",
     "noActiveSubscription": "You don't have an active subscription",
     "cancelError": "Error cancelling subscription",
     "subscriptionCancelled": "Subscription cancelled successfully",
     "subscribe": "Subscribe now",
     "loading": "Loading..."
+  },
+  "footer": {
+    "title": "AI Story Generator",
+    "description": "Create engaging stories in English with artificial intelligence. Customize, generate, and listen to your stories with our free tool.",
+    "quickLinks": "Quick Links",
+    "howItWorks": "How It Works",
+    "aboutUs": "About Us",
+    "terms": "Terms & Conditions",
+    "privacy": "Privacy Policy",
+    "copyright": "AI Story Generator. All rights reserved.",
+    "madeWith": "Made with",
+    "inBarcelona": "in Barcelona"
   }
 } 
