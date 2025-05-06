@@ -264,7 +264,7 @@
     "generalError": "Ha ocurrido un error al generar el cuento. Por favor, inténtalo de nuevo.",
     "loginRequired": "Por favor, inicia sesión para generar cuentos",
     "clickToLogin": "Haz clic aquí para iniciar sesión",
-    "alertTopicRequired": "Escribe el tema de tu cuento"
+    "alertTopicRequired": "Escribe aquí el tema de tu cuento"
   },
   "homepage": {
     "heroTitle": "Audiocuentos para aprender español mientras se duermen.",

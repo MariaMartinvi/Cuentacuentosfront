@@ -94,6 +94,16 @@ function StoryForm({ onStoryGenerated }) {
     setTopic(e.target.value);
   };
 
+  // Función para validar el campo topic cuando pierde el foco
+  const handleTopicBlur = (e) => {
+    const input = e.target;
+    if (!input.value.trim()) {
+      input.setCustomValidity(t('storyForm.alertTopicRequired'));
+    } else {
+      input.setCustomValidity('');
+    }
+  };
+
   return (
     <div className="story-form-container">
       <h2>
@@ -101,7 +111,7 @@ function StoryForm({ onStoryGenerated }) {
         {t('storyForm.title')}
       </h2>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} noValidate>
         <div className="form-group">
           <label htmlFor="topic">
             <span className="form-icon">📝</span> {t('storyForm.topicLabel')}
@@ -111,6 +121,7 @@ function StoryForm({ onStoryGenerated }) {
             id="topic"
             value={topic}
             onChange={handleTopicChange}
+            onBlur={handleTopicBlur}
             placeholder={t('storyForm.topicPlaceholder')}
             required
           />
