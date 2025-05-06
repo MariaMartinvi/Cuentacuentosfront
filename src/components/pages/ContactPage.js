@@ -1,24 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { sendContactMessage } from '../../services/contactService';
+import emailjs from '@emailjs/browser';
 import './ContactPage.css';
 
 const ContactPage = () => {
   const { t } = useTranslation();
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
+  const form = useRef();
   const [status, setStatus] = useState({ type: '', message: '' });
   const [loading, setLoading] = useState(false);
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,11 +15,17 @@ const ContactPage = () => {
     setStatus({ type: '', message: '' });
 
     try {
-      await sendContactMessage(formData);
+      await emailjs.sendForm(
+        'YOUR_SERVICE_ID', // Replace with your EmailJS service ID
+        'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
+        form.current,
+        'YOUR_PUBLIC_KEY' // Replace with your EmailJS public key
+      );
+      
       setStatus({ type: 'success', message: t('contact.form.success') });
-      setFormData({ name: '', email: '', message: '' });
+      form.current.reset();
     } catch (error) {
-      console.error('Error al enviar el formulario de contacto:', error);
+      console.error('Error sending contact form:', error);
       setStatus({ type: 'error', message: t('contact.form.error') });
     } finally {
       setLoading(false);
@@ -46,15 +41,13 @@ const ContactPage = () => {
 
       <div className="contact-container">
         <div className="contact-content">
-          <form onSubmit={handleSubmit} className="contact-form">
+          <form ref={form} onSubmit={handleSubmit} className="contact-form">
             <div className="form-group">
               <label htmlFor="name">{t('contact.form.name')}</label>
               <input
                 type="text"
                 id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
+                name="user_name"
                 placeholder={t('contact.form.namePlaceholder')}
                 required
               />
@@ -65,9 +58,7 @@ const ContactPage = () => {
               <input
                 type="email"
                 id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
+                name="user_email"
                 placeholder={t('contact.form.emailPlaceholder')}
                 required
               />
@@ -78,8 +69,6 @@ const ContactPage = () => {
               <textarea
                 id="message"
                 name="message"
-                value={formData.message}
-                onChange={handleChange}
                 placeholder={t('contact.form.messagePlaceholder')}
                 required
               />
