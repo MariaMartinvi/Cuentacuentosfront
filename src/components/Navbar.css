@@ -286,12 +286,22 @@
       gap: 0.5rem;
     }
 
+    /* Aplicar max-width solo para usuarios no premium */
     .user-name {
-      max-width: 120px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       display: inline-block;
+    }
+    
+    /* Los usuarios no premium tienen un ancho máximo limitado */
+    .user-name:not(.premium-user) {
+      max-width: 120px;
+    }
+    
+    /* Los usuarios premium no tienen límite de ancho */
+    .user-name.premium-user {
+      max-width: none;
     }
 
     .subscribe-link {
@@ -305,7 +315,8 @@
       gap: 0.3rem;
     }
 
-    .user-name {
+    /* Los usuarios no premium tienen un ancho máximo más limitado en pantallas pequeñas */
+    .user-name:not(.premium-user) {
       max-width: 100px;
     }
 

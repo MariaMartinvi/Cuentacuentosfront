@@ -39,7 +39,7 @@ const fetchWithTimeout = async (url, options, timeout) => {
 export const generateAudio = async (options) => {
   try {
     // Extract properties from options object
-    const { text, voiceId, speechRate } = options;
+    const { text, voiceId, speechRate, musicTrack } = options;
     
     // Verify that text is a valid string
     if (typeof text !== 'string') {
@@ -51,6 +51,7 @@ export const generateAudio = async (options) => {
     console.log('📝 Texto:', text.substring(0, 50) + (text.length > 50 ? '...' : ''));
     console.log('🎙️ Voz:', voiceId);
     console.log('⏩ Velocidad:', speechRate || 'normal');
+    console.log('🎵 Música de fondo:', musicTrack === 'none' ? 'Sin música' : (musicTrack || 'random'));
     
     // Determine the correct URL based on environment
     const isProduction = window.location.hostname !== 'localhost';
@@ -64,8 +65,14 @@ export const generateAudio = async (options) => {
     const requestData = { 
       text, 
       voiceId, 
-      speechRate 
+      speechRate,
+      musicTrack: musicTrack // Asegurarnos de enviar el valor exacto, incluyendo 'none'
     };
+
+    console.log('📦 Datos de la solicitud:', JSON.stringify({
+      ...requestData,
+      text: requestData.text.substring(0, 50) + '...'
+    }, null, 2));
 
     const makeRequest = async (retry = false) => {
       try {

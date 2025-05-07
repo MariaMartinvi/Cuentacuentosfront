@@ -272,7 +272,18 @@
     "speedNormal": "Normal",
     "speedFast": "Fast",
     "speedVeryFast": "Very Fast",
-    "audioLimitReached": "You have reached the limit of 4 audio versions for this story. Generate a new story to create more audio versions."
+    "audioLimitReached": "You have reached the limit of 4 audio versions for this story. Generate a new story to create more audio versions.",
+    "backgroundMusic": "Background music:",
+    "noMusic": "No background music",
+    "randomMusic": "Random music",
+    "relaxingMusic": "Relaxing ambient",
+    "magicalMusic": "Magic forest",
+    "adventureMusic": "Adventure",
+    "bedtimeMusic": "Bedtime lullaby",
+    "pianoMusic": "Piano lullaby",
+    "forestMusic": "Forest sounds",
+    "musicBoxMusic": "Music box",
+    "journeyMusic": "Magical journey"
   },
   "homepage": {
     "heroTitle": "Audio stories to learn English while falling asleep.",

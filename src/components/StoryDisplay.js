@@ -8,6 +8,7 @@ function StoryDisplay({ story }) {
   const [audioUrl, setAudioUrl] = useState(null);
   const [voiceType, setVoiceType] = useState(i18n.language === 'en' ? 'female-english' : 'female');
   const [speechRate, setSpeechRate] = useState(0.7); // Default to slow speed
+  const [musicTrack, setMusicTrack] = useState('random'); // Default to random music
   const [isGeneratingAudio, setIsGeneratingAudio] = useState(false);
   const [audioCount, setAudioCount] = useState(0);
   const [alertMessage, setAlertMessage] = useState(null);
@@ -41,6 +42,12 @@ function StoryDisplay({ story }) {
     document.body.removeChild(element);
   };
 
+  const handleMusicTrackChange = (e) => {
+    const value = e.target.value;
+    console.log(`🎵 Música seleccionada: ${value}`);
+    setMusicTrack(value);
+  };
+
   const handleGenerateAudio = async () => {
     if (audioCount >= 4) {
       setAlertMessage(t('storyDisplay.audioLimitReached'));
@@ -52,11 +59,17 @@ function StoryDisplay({ story }) {
 
     try {
       console.log("Solicitando audio para texto:", story.content.substring(0, 50) + "...");
+      console.log("Opciones de audio:", {
+        voiceType,
+        speechRate,
+        musicTrack
+      });
 
       const audioData = await generateAudio({
         text: story.content,
         voiceId: voiceType,
-        speechRate: speechRate
+        speechRate: speechRate,
+        musicTrack: musicTrack
       });
 
       if (!audioData) {
@@ -134,6 +147,27 @@ function StoryDisplay({ story }) {
               <option value="0.8">{t('storyDisplay.speedNormal')}</option>
               <option value="1.0">{t('storyDisplay.speedFast')}</option>
               <option value="1.2">{t('storyDisplay.speedVeryFast')}</option>
+            </select>
+          </div>
+          
+          <div className="voice-selector">
+            <label htmlFor="musicTrack">{t('storyDisplay.backgroundMusic')}</label>
+            <select
+              id="musicTrack"
+              value={musicTrack}
+              onChange={handleMusicTrackChange}
+              disabled={isGeneratingAudio || audioCount >= 4}
+            >
+              <option value="none">{t('storyDisplay.noMusic')}</option>
+              <option value="random">{t('storyDisplay.randomMusic')}</option>
+              <option value="relaxing">{t('storyDisplay.relaxingMusic')}</option>
+              <option value="magical">{t('storyDisplay.magicalMusic')}</option>
+              <option value="adventure">{t('storyDisplay.adventureMusic')}</option>
+              <option value="bedtime">{t('storyDisplay.bedtimeMusic')}</option>
+              <option value="piano">{t('storyDisplay.pianoMusic')}</option>
+              <option value="forest">{t('storyDisplay.forestMusic')}</option>
+              <option value="magic-box">{t('storyDisplay.musicBoxMusic')}</option>
+              <option value="journey">{t('storyDisplay.journeyMusic')}</option>
             </select>
           </div>
 

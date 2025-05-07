@@ -33,7 +33,11 @@ function Navbar() {
         <div className="nav-links">
           {user ? (
             <>
-              <Link to="/profile" className="user-name" onClick={scrollToTop}>
+              <Link 
+                to="/profile" 
+                className={`user-name ${user.isPremium ? 'premium-user' : ''}`} 
+                onClick={scrollToTop}
+              >
                 {user.name || user.email}
                 {user.isPremium && (
                   <span className="premium-badge">⭐ Premium</span>
