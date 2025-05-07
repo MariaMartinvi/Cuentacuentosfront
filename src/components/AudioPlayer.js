@@ -22,6 +22,9 @@ function AudioPlayer({ audioUrl }) {
         setProgress((audio.currentTime / audio.duration) * 100);
       };
 
+      // Set audio to loop to ensure continuous background music
+      audio.loop = true;
+
       // Event listeners
       audio.addEventListener('loadeddata', setAudioData);
       audio.addEventListener('timeupdate', setAudioTime);
@@ -69,7 +72,7 @@ function AudioPlayer({ audioUrl }) {
 
   return (
     <div className="audio-player">
-      <audio ref={audioRef} src={audioUrl} />
+      <audio ref={audioRef} src={audioUrl} loop />
 
       <div className="player-header">
         <div className="player-title">

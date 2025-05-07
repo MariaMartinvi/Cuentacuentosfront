@@ -125,9 +125,9 @@
     "introduccion": "Introducción",
     "introduccionTexto": "En MiCuentaCuentos, nos tomamos muy en serio la privacidad de nuestros usuarios. Esta política explica cómo manejamos tus datos personales y cómo protegemos tu privacidad mientras utilizas nuestro servicio de generación de cuentos.",
     "datos": "Datos que Recopilamos",
-    "datosTexto": "Recopilamos la siguiente información: 1) Datos de registro: nombre, email y contraseña (encriptada). 2) Datos de uso: preferencias de cuentos, historial de generación y configuraciones. 3) Datos de pago: procesados de forma segura por Stripe, sin almacenar información de tarjetas. 4) Cookies: para mejorar la experiencia y analizar el uso del sitio.",
+    "datosTexto": "Recopilamos la siguiente información: 1) Datos de registro: nombre, correo electrónico y contraseña (cifrada). 2) Datos de uso: preferencias de historias, historial de generación y configuraciones. 3) Datos de pago: procesados de forma segura por Stripe, sin almacenar información de tarjetas. 4) Cookies: para mejorar la experiencia y analizar el uso del sitio.",
     "usoDatos": "Uso de los Datos",
-    "usoDatosTexto": "Utilizamos tus datos para: 1) Proporcionar y mejorar el servicio. 2) Personalizar tu experiencia. 3) Procesar pagos de forma segura. 4) Enviar actualizaciones importantes. 5) Responder a consultas de soporte. No compartimos tus datos con terceros excepto para procesar pagos o cuando sea requerido por ley.",
+    "usoDatosTexto": "Utilizamos tus datos para: 1) Proporcionar y mejorar el servicio. 2) Personalizar tu experiencia. 3) Procesar pagos de forma segura. 4) Enviar actualizaciones importantes. 5) Responder a consultas de soporte. No compartimos tus datos con terceros excepto para el procesamiento de pagos o cuando lo exija la ley.",
     "seguridad": "Seguridad y Protección",
     "seguridadTexto": "Implementamos medidas de seguridad robustas: 1) Encriptación de datos sensibles. 2) Autenticación segura. 3) Protección contra accesos no autorizados. 4) Copias de seguridad regulares. 5) Monitoreo continuo de seguridad. Los datos de pago se procesan exclusivamente a través de Stripe, cumpliendo con los más altos estándares de seguridad.",
     "cookies": "Cookies y Tecnologías Similares",
@@ -371,5 +371,12 @@
   },
   "common": {
     "learnMore": "Pruébalo"
+  },
+  "cookies": {
+    "title": "Usamos cookies",
+    "description": "Este sitio utiliza cookies para mejorar tu experiencia, analizar el tráfico y personalizar el contenido. Al aceptar, consientes el uso de cookies según nuestra política de privacidad.",
+    "accept": "Aceptar",
+    "reject": "Rechazar",
+    "moreInfo": "Más información"
   }
 } 

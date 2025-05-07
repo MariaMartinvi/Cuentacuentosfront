@@ -32,7 +32,7 @@ const AboutPage = () => {
           <h2 className="section-title">{t('about.team.title')}</h2>
           <p className="team-description">
             {t('about.team.description')}{' '}
-            <a href="https://comartinvi.com/" target="_blank" rel="noopener noreferrer" className="team-link">
+            <a href="https://www.comartinvi.com/" target="_blank" rel="noopener noreferrer" className="team-link">
               comartinvi.com
             </a>
           </p>

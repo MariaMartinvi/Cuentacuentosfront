@@ -182,7 +182,7 @@
     "cookies": "Cookies and Similar Technologies",
     "cookiesTexto": "We use cookies to: 1) Keep your session active. 2) Remember your preferences. 3) Analyze site usage. 4) Improve performance. You can manage your cookie preferences at any time. Some features may not be available if you disable essential cookies.",
     "derechos": "Your Rights",
-    "derechosTexto": "You have the right to: 1) Access your personal data. 2) Correct inaccurate information. 3) Request deletion of your data. 4) Export your data in standard format. 5) Withdraw your consent at any time. To exercise these rights, contact us through the contact form."
+    "derechosTexto": "You have the right to: 1) Access your personal data. 2) Correct inaccurate information. 3) Request deletion of your data. 4) Export your data in a standard format. 5) Withdraw your consent at any time. To exercise these rights, please contact us through our contact form."
   },
   "about": {
     "title": "About Us",
@@ -361,5 +361,12 @@
     "copyright": "AI Story Generator. All rights reserved.",
     "madeWith": "Made with",
     "inBarcelona": "in Barcelona"
+  },
+  "cookies": {
+    "title": "We use cookies",
+    "description": "This site uses cookies to enhance your experience, analyze traffic, and personalize content. By accepting, you consent to the use of cookies as described in our privacy policy.",
+    "accept": "Accept",
+    "reject": "Reject",
+    "moreInfo": "More information"
   }
 } 
