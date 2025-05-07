@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { login, loginWithGoogle } from '../services/authService';
 import { useAuth } from '../contexts/AuthContext';
 import './Login.css';
+import SEO from './SEO';
 
 // Determinar la URL correcta basada en el entorno
 const isProduction = window.location.hostname !== 'localhost';
@@ -12,7 +13,7 @@ const API_URL = isProduction
   : 'http://localhost:5001';
 
 const Login = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const { refreshUser } = useAuth();
   const [formData, setFormData] = useState({
@@ -119,6 +120,16 @@ const Login = () => {
   if (initialLoading) {
     return (
       <div className="login-container">
+        <SEO 
+          title={i18n.language === 'es' ? 
+            'Iniciar Sesión - Mi Cuentacuentos' : 
+            'Login - My Storyteller'}
+          description={i18n.language === 'es' ? 
+            'Inicia sesión en Mi Cuentacuentos para acceder a todas las funciones de generación de cuentos personalizados.' : 
+            'Log in to My Storyteller to access all the personalized story generation features.'}
+          keywords={['iniciar sesión', 'login', 'acceso', 'cuenta de usuario']}
+          lang={i18n.language}
+        />
         <div className="login-card">
           <div className="loading-container">
             <div className="spinner"></div>
@@ -132,6 +143,16 @@ const Login = () => {
   if (googleLoading) {
     return (
       <div className="fullscreen-overlay">
+        <SEO 
+          title={i18n.language === 'es' ? 
+            'Iniciar Sesión con Google - Mi Cuentacuentos' : 
+            'Login with Google - My Storyteller'}
+          description={i18n.language === 'es' ? 
+            'Iniciando sesión con Google en Mi Cuentacuentos.' : 
+            'Logging in with Google to My Storyteller.'}
+          keywords={['iniciar sesión', 'login', 'google', 'autenticación']}
+          lang={i18n.language}
+        />
         <div className="google-loading-container">
           <div className="google-logo">
             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
@@ -150,6 +171,16 @@ const Login = () => {
 
   return (
     <div className="login-container">
+      <SEO 
+        title={i18n.language === 'es' ? 
+          'Iniciar Sesión - Mi Cuentacuentos' : 
+          'Login - My Storyteller'}
+        description={i18n.language === 'es' ? 
+          'Inicia sesión en Mi Cuentacuentos para acceder a todas las funciones de generación de cuentos personalizados.' : 
+          'Log in to My Storyteller to access all the personalized story generation features.'}
+        keywords={['iniciar sesión', 'login', 'acceso', 'cuenta de usuario']}
+        lang={i18n.language}
+      />
       <div className="login-card">
         <h1 className="login-title">{t('login.title')}</h1>
         <p className="login-subtitle">{t('login.subtitle')}</p>

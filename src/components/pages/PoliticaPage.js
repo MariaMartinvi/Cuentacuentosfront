@@ -1,12 +1,24 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import './PoliticaPage.css';
+import SEO from '../SEO';
 
 const PoliticaPage = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   return (
     <div className="politica-page">
+      <SEO 
+        title={i18n.language === 'es' ? 
+          'Política de Privacidad - Mi Cuentacuentos' : 
+          'Privacy Policy - My Storyteller'}
+        description={i18n.language === 'es' ? 
+          'Política de privacidad de Mi Cuentacuentos. Información sobre cómo recopilamos, usamos y protegemos tus datos personales.' : 
+          'Privacy policy of My Storyteller. Information about how we collect, use and protect your personal data.'}
+        keywords={['política de privacidad', 'protección de datos', 'cookies', 'seguridad', 'derechos de usuario']}
+        lang={i18n.language}
+      />
+      
       <div className="page-header">
         <h1>{t('politica.title')}</h1>
       </div>

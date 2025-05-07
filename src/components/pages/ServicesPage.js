@@ -1,12 +1,24 @@
 import React from 'react';
 import '../../styles/services.css';
 import { useTranslation } from 'react-i18next'
+import SEO from '../SEO';
 
 function ServicesPage() {
   const { t, i18n } = useTranslation();
 
   return (
     <div className="page services-page">
+      <SEO 
+        title={i18n.language === 'es' ? 
+          'Servicios - Mi Cuentacuentos' : 
+          'Services - My Storyteller'}
+        description={i18n.language === 'es' ? 
+          'Descubre todos los servicios que ofrece Mi Cuentacuentos: generador de historias, contenido educativo y asistente de escritura.' : 
+          'Discover all the services offered by My Storyteller: story generator, educational content and writing assistant.'}
+        keywords={['servicios', 'generador de cuentos', 'contenido educativo', 'asistente de escritura', 'herramientas creativas']}
+        lang={i18n.language}
+      />
+      
       <div className="page-header">
         <div className="container">
           <h1>1. {t('services.introductiontitle')}</h1>

@@ -4,9 +4,10 @@ import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import { useAuth } from '../contexts/AuthContext';
 import './Register.css';
+import SEO from './SEO';
 
 const Register = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const { login } = useAuth();
   const [formData, setFormData] = useState({
@@ -79,6 +80,17 @@ const Register = () => {
 
   return (
     <div className="register-container">
+      <SEO 
+        title={i18n.language === 'es' ? 
+          'Registro - Mi Cuentacuentos' : 
+          'Register - My Storyteller'}
+        description={i18n.language === 'es' ? 
+          'Crea una cuenta en Mi Cuentacuentos y comienza a generar cuentos personalizados para niños. Regístrate gratis y obtén cuentos de prueba.' : 
+          'Create an account on My Storyteller and start generating personalized stories for children. Register for free and get trial stories.'}
+        keywords={['registro', 'crear cuenta', 'sign up', 'cuenta gratis', 'cuentos personalizados']}
+        lang={i18n.language}
+      />
+      
       <div className="register-card">
         <h1 className="register-title">{t('register.title')}</h1>
         <p className="register-subtitle">{t('register.subtitle')}</p>

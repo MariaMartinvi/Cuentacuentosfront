@@ -2,12 +2,24 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import './TerminosPage.css';
+import SEO from '../SEO';
 
 const TerminosPage = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   return (
     <div className="terminos-page">
+      <SEO 
+        title={i18n.language === 'es' ? 
+          'Términos y Condiciones - Mi Cuentacuentos' : 
+          'Terms and Conditions - My Storyteller'}
+        description={i18n.language === 'es' ? 
+          'Términos y condiciones de uso de Mi Cuentacuentos. Información sobre suscripciones, propiedad intelectual y limitaciones de responsabilidad.' : 
+          'Terms and conditions of use for My Storyteller. Information about subscriptions, intellectual property and liability limitations.'}
+        keywords={['términos y condiciones', 'condiciones de uso', 'suscripción', 'propiedad intelectual', 'limitación de responsabilidad']}
+        lang={i18n.language}
+      />
+      
       <div className="page-header">
         <h1>{t('terminos.title')}</h1>
       </div>

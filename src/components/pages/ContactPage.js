@@ -2,9 +2,10 @@ import React, { useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import emailjs from '@emailjs/browser';
 import './ContactPage.css';
+import SEO from '../SEO';
 
 const ContactPage = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const form = useRef();
   const [status, setStatus] = useState({ type: '', message: '' });
   const [loading, setLoading] = useState(false);
@@ -34,6 +35,17 @@ const ContactPage = () => {
 
   return (
     <div className="contact-page">
+      <SEO 
+        title={i18n.language === 'es' ? 
+          'Contacto - Mi Cuentacuentos' : 
+          'Contact - My Storyteller'}
+        description={i18n.language === 'es' ? 
+          'Contacta con el equipo de Mi Cuentacuentos. Estamos aquí para responder tus preguntas y escuchar tus sugerencias.' : 
+          'Contact the My Storyteller team. We are here to answer your questions and listen to your suggestions.'}
+        keywords={['contacto', 'soporte', 'ayuda', 'preguntas', 'sugerencias', 'formulario de contacto']}
+        lang={i18n.language}
+      />
+      
       <div className="page-header">
         <h1>{t('contact.title')}</h1>
         <p>{t('contact.description')}</p>

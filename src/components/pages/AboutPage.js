@@ -2,12 +2,24 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import './AboutPage.css';
+import SEO from '../SEO';
 
 const AboutPage = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   return (
     <div className="about-page">
+      <SEO 
+        title={i18n.language === 'es' ? 
+          'Sobre Nosotros - Mi Cuentacuentos' : 
+          'About Us - My Storyteller'}
+        description={i18n.language === 'es' ? 
+          'Conoce más sobre Mi Cuentacuentos, nuestra misión, visión y el equipo detrás de esta plataforma de cuentos personalizados.' : 
+          'Learn more about My Storyteller, our mission, vision and the team behind this personalized storytelling platform.'}
+        keywords={['sobre nosotros', 'equipo creativo', 'misión', 'visión', 'valores', 'cuentos personalizados']}
+        lang={i18n.language}
+      />
+      
       <div className="page-header">
         <h1>{t('about.title')}</h1>
         <p>{t('about.subtitle')}</p>

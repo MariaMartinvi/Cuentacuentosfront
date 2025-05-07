@@ -1,9 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import './ComoFuncionaPage.css';
+import SEO from '../SEO';
 
 const ComoFuncionaPage = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const steps = [
     {
@@ -22,6 +23,17 @@ const ComoFuncionaPage = () => {
 
   return (
     <div className="como-funciona-page">
+      <SEO 
+        title={i18n.language === 'es' ? 
+          'Cómo Funciona - Mi Cuentacuentos' : 
+          'How It Works - My Storyteller'}
+        description={i18n.language === 'es' ? 
+          'Descubre cómo funciona Mi Cuentacuentos. Aprende a crear cuentos personalizados y convertirlos en audio en simples pasos.' : 
+          'Discover how My Storyteller works. Learn to create personalized stories and convert them to audio in simple steps.'}
+        keywords={['cómo funciona', 'tutorial', 'guía de uso', 'crear cuentos', 'convertir a audio', 'pasos', 'instrucciones']}
+        lang={i18n.language}
+      />
+      
       <div className="page-header">
         <h1>{t('comoFunciona.title')}</h1>
         <p>{t('comoFunciona.description')}</p>

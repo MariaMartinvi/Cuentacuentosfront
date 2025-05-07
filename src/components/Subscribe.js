@@ -4,9 +4,10 @@ import { useTranslation } from 'react-i18next';
 import { useAuth } from '../contexts/AuthContext';
 import { createCheckoutSession, loadStripe } from '../services/subscriptionService';
 import './Subscribe.css';
+import SEO from './SEO';
 
 const Subscribe = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
@@ -55,6 +56,17 @@ const Subscribe = () => {
 
   return (
     <div className="subscribe-container">
+      <SEO 
+        title={i18n.language === 'es' ? 
+          'Suscripción Premium - Mi Cuentacuentos' : 
+          'Premium Subscription - My Storyteller'}
+        description={i18n.language === 'es' ? 
+          'Suscríbete al plan premium de Mi Cuentacuentos y desbloquea acceso ilimitado a la generación de cuentos personalizados para niños.' : 
+          'Subscribe to My Storyteller premium plan and unlock unlimited access to personalized story generation for children.'}
+        keywords={['suscripción premium', 'plan mensual', 'cuentos ilimitados', 'características premium', 'acceso completo']}
+        lang={i18n.language}
+      />
+      
       <div className="subscribe-card">
         <h1 className="subscribe-title">{t('subscription.title')}</h1>
         <p className="subscribe-subtitle">{t('subscription.subtitle')}</p>
