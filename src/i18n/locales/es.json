@@ -25,6 +25,13 @@
     "cancelling": "Cancelando...",
     "subscriptionCancelled": "Suscripción cancelada exitosamente",
     "cancelError": "Error al cancelar la suscripción",
-    "noActiveSubscription": "No tienes una suscripción activa"
+    "noActiveSubscription": "No tienes una suscripción activa",
+    "storiesRemaining": "Cuentos Disponibles",
+    "storiesRemainingOf": "de",
+    "loading": "Cargando...",
+    "error": "Ha ocurrido un error",
+    "cancelInfo": "Tu suscripción seguirá activa hasta el final del período de facturación actual",
+    "premiumInfo": "Suscríbete al plan Premium para generar hasta 30 cuentos al mes",
+    "learnMore": "Más información"
   }
 } 

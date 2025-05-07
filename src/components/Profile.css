@@ -44,6 +44,17 @@
   margin: 0;
 }
 
+.stories-count {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.stories-count strong {
+  color: var(--primary, #4361ee);
+  font-size: 1.3rem;
+}
+
 .status {
   display: inline-block;
   padding: 0.3rem 0.8rem;
