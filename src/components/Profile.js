@@ -5,6 +5,7 @@ import axios from 'axios';
 import { getCurrentUser, logout } from '../services/authService';
 import { useAuth } from '../contexts/AuthContext';
 import './Profile.css';
+import SEO from './SEO';
 
 const Profile = () => {
   const { t, i18n } = useTranslation();
@@ -110,6 +111,17 @@ const Profile = () => {
 
   return (
     <div className="profile-container">
+      <SEO 
+        title={i18n.language === 'es' ? 
+          'Mi Perfil - Mi Cuentacuentos' : 
+          'My Profile - My Storyteller'}
+        description={i18n.language === 'es' ? 
+          'Gestiona tu perfil y suscripción en Mi Cuentacuentos. Consulta tus cuentos disponibles y opciones de cuenta.' : 
+          'Manage your profile and subscription in My Storyteller. Check your available stories and account options.'}
+        keywords={['perfil usuario', 'cuenta', 'suscripción', 'cuentos disponibles', 'gestión de cuenta']}
+        lang={i18n.language}
+      />
+      
       <div className="profile-card">
         <h1 className="profile-title">{t('profile.title')}</h1>
         
